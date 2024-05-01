@@ -23,6 +23,10 @@
 
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'empty'
+})
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

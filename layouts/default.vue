@@ -9,9 +9,9 @@
                 <NuxtLink to="/edit">แก้ไขสต็อก</NuxtLink>
                 <NuxtLink to="/create">สร้างออเดอร์</NuxtLink>
             </nav>
-            <navbar class="navbar-header">
+            <nav class="navbar-header">
                 <NuxtLink to="/create">สร้างออเดอร์</NuxtLink>
-            </navbar>
+            </nav>
         </header>
         <div class="contect-container">
             <slot />
@@ -59,7 +59,7 @@ body {
     height: 100vh;
 }
 .navbar-header {
-    width: 200px; /* Adjust the width as needed */
+    width: 200px; 
     background-color: white;
     padding: 20px;
 }
