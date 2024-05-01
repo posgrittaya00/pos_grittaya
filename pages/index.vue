@@ -11,6 +11,9 @@
             <p class="forget-container">ลืมรหัสผ่าน</p><br>
         </div>
     
+        <div class="card flex justify-center">
+            <Checkbox v-model="checked" :binary="true" />
+        </div>
 
         {{ login.username }}<br>
         {{ login.password }}<br>
@@ -43,7 +46,7 @@ const login = ref<Login>(
 )
 
 const router = useRouter();
-
+const checked = ref(false);
 const submitLogin = () => {
     // Simulate login logic
     if (login.value.username === 'jan' && login.value.password === '11111') {
@@ -56,6 +59,7 @@ const submitLogin = () => {
 </script>
 
 <style lang="scss" scoped>
+@import url('~/assets/css/main.css');
 .login-container {
     max-width: 400px;
     margin: 0 auto;
