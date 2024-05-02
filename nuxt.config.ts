@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss','nuxt-primevue'],
   typescript: {strict: false},
+  css: [
+    'primeicons/primeicons.css'
+  ],
   primevue: {
     options: {
       unstyled: true
@@ -44,5 +47,5 @@ export default defineNuxtConfig({
         }
     }
     }
-  }
+  },
 })
