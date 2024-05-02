@@ -1,66 +1,36 @@
 <template>
-    <div>
-        <header>
-            <nav class="navbar-left">
-                <h1 class="logo">Grittaya Shop</h1>
-                <NuxtLink to="/dashboard">แดชบอร์ด</NuxtLink>
-                <NuxtLink to="/sale">คลังสินค้าที่ขาย</NuxtLink>
-                <NuxtLink to="/stock">คลังสินค้าที่สต็อก</NuxtLink>
-                <NuxtLink to="/edit">แก้ไขสต็อก</NuxtLink>
-                <NuxtLink to="/create">สร้างออเดอร์</NuxtLink>
-            </nav>
-            <nav class="navbar-header">
-                <NuxtLink to="/create">สร้างออเดอร์</NuxtLink>
-            </nav>
-        </header>
-        <div class="contect-container">
-            <slot />
-        </div>
-        <body>
-
-        </body>
-    </div>
+  <div class="bg-[#E2E2E2] min-h-screen">
+    <navbar />
+    <slot />
+    <div></div>
+  </div>
 </template>
 
 <script setup>
-
+import navbar from "~/components/navbar.vue";
 </script>
 
-<style lang="scss" scoped>
-.navbar-left {
-    width: 200px; /* Adjust the width as needed */
-    background-color: white;
-    padding: 20px;
-}
+<style lang="scss">
+// header {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 10px;
+//     background-color: white;
+//     color: black;
+// }
 
-.logo {
-    color: black;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+// .navbar-logo {
+//     display: flex;
+//     align-items: center;
+// }
 
-.navbar-left a {
-    display: block;
-    color: black;
-    text-decoration: none;
-    margin-bottom: 10px;
-}
+// .navbar-logo img {
+//     height: 50px;
+//     margin-right: 10px;
+// }
 
-.navbar-left a:hover {
-    text-decoration: underline;
-}
-body {
-    background-color: #E2E2E2;
-}
-.contect-container {
-    display: flex;
-    justify-content: center;
-    align-items: auto;
-    height: 100vh;
-}
-.navbar-header {
-    width: 200px; 
-    background-color: white;
-    padding: 20px;
-}
+// // .content-container {
+// //     padding: 20px;
+// // }
 </style>
