@@ -1,7 +1,10 @@
 <template>
-<div></div>
-    <!-- <div class="login-container"> -->
-        <!-- <h1>เข้าสู่ระบบ</h1>
+    <div>
+        <h1>Index Page</h1>
+    </div>
+</template>
+  <!-- <div class="login-container"> -->
+  <!-- <h1>เข้าสู่ระบบ</h1>
         <div class="input-container">
             <label for ="">username</label>
             <input type="text" name="ชื่อผู้ใช้" v-model="login.username"><br>
@@ -18,9 +21,7 @@
         <div class="input-container">
             <button @click="submitLogin">เข้าสู่ระบบ</button><br>
         </div> -->
-    <!-- </div> -->
-</template>
-
+  <!-- </div> -->
 
 <script setup lang="ts">
 // definePageMeta({
@@ -55,7 +56,7 @@
 // }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 // @import url('~/assets/css/main.css');
 // .login-container {
 //     max-width: 400px;

@@ -1,14 +1,20 @@
 <template>
   <div class="bg-[#E2E2E2] min-h-screen">
-    <navbar />
-    <sidebar />
-    <slot />
-    <div></div>
+    <div>
+      <navbar />
+      <div class="flex gap-2">
+        <sidebar />
+        <div class="m-3 bg-white w-full">
+          <slot/>
+        </div>
+      </div>
+
+    </div>
+      
   </div>
 </template>
 
 <script setup>
-import navbar from "~/components/navbar.vue";
 </script>
 
 <style lang="scss">
