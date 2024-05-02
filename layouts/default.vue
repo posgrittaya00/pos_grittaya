@@ -1,6 +1,7 @@
 <template>
   <div class="bg-[#E2E2E2] min-h-screen">
     <navbar />
+    <sidebar />
     <slot />
     <div></div>
   </div>
