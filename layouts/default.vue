@@ -4,13 +4,9 @@
       <navbar />
       <div class="flex gap-2">
         <sidebar />
-        <div class="m-3 bg-white w-full">
           <slot/>
-        </div>
       </div>
-
-    </div>
-      
+    </div>      
   </div>
 </template>
 
