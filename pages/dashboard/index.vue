@@ -5,37 +5,37 @@
             <div class="flex gap-2 w-1/4 h-[140px] justify-around items-center bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2">
                 <div class="flex flex-col">
                     <h3 class="text-[1.5rem] text-[#7A7C7F] font-semibold mb-2">ยอดขายทั้งหมด</h3>
-                    <p class="text-[2.25rem] font-bold">1,000,000 บาท</p>
+                    <p class="text-[1.5rem] font-bold">1,000,000 บาท</p>
                 </div>
-                    <div class="rounded-full shadow-[4px_4px_4px_rgba(0,0,0,0.25)] w-20 h-20 bg-[#3B7EBF] -mt-4 -mr-4 flex items-center justify-center">
-                        <i class="pi pi-chart-bar text-white text-[2.25rem]" ></i>
-                    </div>
-            </div>
-            <div class="w-1/4 h-140 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2" style="height: 140px;">
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">ต้นทุนทั้งหมด</h3>
-                    <p class="text-2xl font-bold">500,000 บาท</p>
-                </div>
-                <div class="rounded-full w-12 h-12 bg-blue-500 -mt-4 -mr-4 flex items-center justify-center">
-                    <i class="pi pi-gift text-white" style="font-size: 1.5rem"></i>
+                <div class="rounded-full shadow-[4px_4px_4px_rgba(0,0,0,0.25)] w-16 h-16 bg-[#3B7EBF] mt-2 flex items-center justify-center">
+                    <i class="pi pi-chart-bar text-white text-[2rem]" ></i>
                 </div>
             </div>
-            <div class="w-1/4 h-140 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2" style="height: 140px;">
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">กำไรทั้งหมด</h3>
-                    <p class="text-2xl font-bold">500,000 บาท</p>
+            <div class="flex gap-2 w-1/4 h-[140px] justify-around items-center bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2">
+                <div class="flex flex-col">
+                    <h3 class="text-[1.5rem] text-[#7A7C7F] font-semibold mb-2">ต้นทุนทั้งหมด</h3>
+                    <p class="text-[1.5rem] font-bold">500,000 บาท</p>
                 </div>
-                <div class="rounded-full w-12 h-12 bg-blue-500 -mt-4 -mr-4 flex items-center justify-center">
-                    <i class="pi pi-ticket text-white" style="font-size: 1.5rem"></i>
+                <div class="rounded-full shadow-[4px_4px_4px_rgba(0,0,0,0.25)] w-16 h-16 bg-[#FABD4E] mt-2 flex items-center justify-center">
+                    <i class="pi pi-gift text-white text-[2rem]"></i>
                 </div>
             </div>
-            <div class="w-1/4 h-140 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2" style="height: 140px;">
+            <div class="flex gap-2 w-1/4 h-[140px] justify-around items-center bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2">
                 <div>
-                    <h3 class="text-lg font-semibold mb-2">ออเดอร์ทั้งหมด</h3>
-                    <p class="text-2xl font-bold">100 รายการ</p>
+                    <h3 class="text-[1.5rem] text-[#7A7C7F] font-semibold mb-2">กำไรทั้งหมด</h3>
+                    <p class="text-[1.5rem] font-bold">500,000 บาท</p>
                 </div>
-                <div class="rounded-full w-12 h-12 bg-blue-500 -mt-4 -mr-4 flex items-center justify-center">
-                    <i class="pi pi-list-check text-white" style="font-size: 1.5rem"></i>
+                <div class="rounded-full shadow-[4px_4px_4px_rgba(0,0,0,0.25)] w-16 h-16 bg-[#49BA6C] mt-2 flex items-center justify-center">
+                    <i class="pi pi-ticket text-white text-[2rem]"></i>
+                </div>
+            </div>
+            <div class="flex gap-2 w-1/4 h-[140px] justify-around items-center bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2 mt-2">
+                <div>
+                    <h3 class="text-[1.5rem] text-[#7A7C7F] font-semibold mb-2">ออเดอร์ทั้งหมด</h3>
+                    <p class="text-[1.5rem] font-bold">100 รายการ</p>
+                </div>
+                <div class="rounded-full shadow-[4px_4px_4px_rgba(0,0,0,0.25)] w-16 h-16 bg-[#E59D48] mt-2 flex items-center justify-center">
+                    <i class="pi pi-list-check text-white text-[2rem]"></i>
                 </div>
             </div>
         </div>
