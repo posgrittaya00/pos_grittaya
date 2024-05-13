@@ -2,7 +2,7 @@
   <div class="bg-[#E2E2E2] min-h-screen">
     <div>
       <navbar />
-      <div class="max-w-screen-xl flex gap-2">
+      <div class="min-w-screen-xl flex gap-2">
         <sidebar />
         <div class="w-full">
             <slot/>

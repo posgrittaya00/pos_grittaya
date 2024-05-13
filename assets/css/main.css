@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,3 +28,6 @@
     --surface-900: 15 23 42;
     --surface-950: 3 6 23;
 }
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+  }

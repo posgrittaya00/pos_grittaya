@@ -4,13 +4,14 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss','nuxt-primevue'],
   typescript: {strict: false},
   css: [
-    'primeicons/primeicons.css'
+    'primeicons/primeicons.css',
+    '@/assets/css/main.css',
   ],
   primevue: {
     options: {
       unstyled: true
     },
-    importPT: { from: `${__dirname}/preset/lara/` }      //import and apply preset   
+    importPT: { from: `${__dirname}/preset/lara/` }
 },
   tailwindcss: {
     config: {
