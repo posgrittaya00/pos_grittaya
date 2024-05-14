@@ -10,7 +10,7 @@
         </span>
     </div>
     <div class="flex">
-    <div class="flex flex-col gap-4 w-[1200px] h-[300px] text-[16px] font-semibold rounded-b-lg rounded-tr-lg bg-[white] p-4 relative">
+    <div class="flex flex-col gap-4 w-full h-[300px] text-[16px] font-semibold rounded-b-lg rounded-tr-lg bg-[white] p-4 relative mr-2">
         <div class="flex justify-between">
             <span class="block mb-3">ออเดอร์</span>
             <input type="datetime-local" id="meeting-time"
