@@ -8,11 +8,11 @@
               <Dropdown v-model="selectedCity" editable :options="cities" optionLabel="name" placeholder="หมวดหมู่" class="w-full md:w-[9rem]" />
             </span>
             <span class="relative">
-              <InputText v-model="value1" placeholder="ค้นหาออเดอร์" class="w-[300px] h-[40px] mr-2 mt-3" />
-              <i class="pi pi-search absolute top-2/4 -mt-1 left-1 text-surface-400 dark:text-surface-600"/>
+              <InputText v-model="value1" placeholder="ค้นหาออเดอร์" class="w-[300px] h-[40px] mr-2 mt-3 pl-10 placeholder-shift" />
+              <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"/>
             </span>
             <span class="buttoncreate">
-              <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2 mt-3"  @click="goToCreateOrder"/>
+              <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2 mt-3" @click="goTosalecreate"/>
             </span>
           </div>
         </div>
@@ -34,9 +34,33 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const goTosalecreate = () => {
+    router.push('/sale/salecreate');
+};
+
+definePageMeta({
+    layout: 'default'
+})
 </script>
 
 <style>
+.placeholder-shift::placeholder {
+  color: #999; /* ตัวอย่างสีของ placeholder */
+  font-size: 14px; /* ตัวอย่างขนาดของ placeholder */
+  transform: translateY(-2px); /* ขยับ placeholder ลงหรือขึ้นตามต้องการ */
+}
 
+.relative .pi-search {
+  transform: translateY(-50%);
+}
+
+.relative .pi-search {
+  top: 60%; /* ปรับค่าตรงนี้เพื่อขยับไอคอนขึ้นหรือลง */
+  left: 10px; /* ปรับค่าตรงนี้เพื่อขยับไอคอนไปทางซ้ายหรือขวา */
+  transform: translateY(-50%);
+  color: #999; /* ตัวอย่างสีของไอคอน */
+}
 </style>
