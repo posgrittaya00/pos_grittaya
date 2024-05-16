@@ -113,7 +113,8 @@ const order = ref([
 const selectedDelivery = ref();
 const delivery = ref([
     { name: 'ไปรษณีย์ไทย', code: 'THAI' }, //อย่าลืมแก้
-    { name: 'J&T', code: 'JT' }
+    { name: 'J&T', code: 'JT' },
+    { name: 'Flash Exprees', code: 'FE' }
 ]);
 
 const selectedPayment = ref();

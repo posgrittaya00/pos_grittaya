@@ -1,11 +1,37 @@
 <template>
-    <div>
-        <h1>แก้ไขสต็อก</h1>
+    <!-- กล่องที่ 1 -->
+    <div class="flex">
+        <div class="flex flex-col gap-4 w-full h-[70px] text-[16px] font-semibold rounded-t-lg bg-[white] p-4 relative mt-2 mr-2">
+            <div class="flex justify-between">
+                <Dropdown v-model="selectedCategory" editable :options="category" optionLabel="name" class="w-[250px] h-[40px]"/>
+                <span class="relative" iconPosition="left">
+                    <i class="pi pi-search absolute mt-3 right-5 text-surface-400 dark:text-surface-600"/>
+                    <InputText v-model="value1" placeholder="ค้นหาสินค้า" class="ml-2 w-[900px] h-[40px]"/>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- กล่องที่ 2 -->
+    <div class="flex">
+        <div class="flex flex-col gap-4 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-4 relative mr-2">
+            <DataTable :value="products" tableStyle="min-width: 50rem">
+                <Column field="codeproduct" header="รหัสสินค้า"></Column>
+                <Column field="nameproduct" header="ชื่อสินค้า"></Column>
+                <Column field="price" header="ราคา(บาท)"></Column>
+                <Column field="quantity" header="จำนวน"></Column>
+                <Column field="unit" header="หน่วย"></Column>
+                <Column field="category" header="หมวดหมู่"></Column>
+            </DataTable>
+        </div>
     </div>
 </template>
 
 <script setup>
-
+const selectedCategory = ref();
+const category = ref([
+    { name: 'เครื่องดื่ม', code: 'DRINK' }, //อย่าลืมแก้
+    { name: 'อาหารแห้ง', code: 'DF' }
+]);
 </script>
 
 <style lang="scss" scoped>
