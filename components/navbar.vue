@@ -17,9 +17,8 @@
           @click="toggle"
           aria-haspopup="true"
           aria-controls="overlay_tmenu"
-          class="ease cursor-pointer duration-100 card flex justify-center items-center w-8 h-8 rounded hover:bg-[#000000] hover:bg-opacity-20"
-        >
-           <i class="pi pi-sort-down-fill cursor-pointer"></i>
+          class="ease cursor-pointer duration-100 card flex justify-center items-center w-8 h-8 rounded hover:bg-[#000000] hover:bg-opacity-20">
+          <i class="pi pi-sort-down-fill cursor-pointer"></i>
           <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
         </div>
       </nav>
@@ -33,71 +32,27 @@ import { ref } from "vue";
 const menu = ref();
 const items = ref([
   {
-    label: "File",
+    label: "ชื่อผู้ใช้",
     icon: "pi pi-file",
-    items: [
-      {
-        label: "New",
-        icon: "pi pi-plus",
-        items: [
-          {
-            label: "Document",
-            icon: "pi pi-file",
-          },
-          {
-            label: "Image",
-            icon: "pi pi-image",
-          },
-          {
-            label: "Video",
-            icon: "pi pi-video",
-          },
-        ],
-      },
-      {
-        label: "Open",
-        icon: "pi pi-folder-open",
-      },
-      {
-        label: "Print",
-        icon: "pi pi-print",
-      },
-    ],
   },
   {
-    label: "Edit",
+    label: "ชื่อเล่น",
     icon: "pi pi-file-edit",
-    items: [
-      {
-        label: "Copy",
-        icon: "pi pi-copy",
-      },
-      {
-        label: "Delete",
-        icon: "pi pi-times",
-      },
-    ],
   },
   {
-    label: "Search",
-    icon: "pi pi-search",
+    label: "ตำแหน่ง",
+    icon: "pi pi-file",
+  },
+  {
+    label: "รหัสผู้ใช้",
+    icon: "pi pi-file-edit",
   },
   {
     separator: true,
   },
   {
-    label: "Share",
-    icon: "pi pi-share-alt",
-    items: [
-      {
-        label: "Slack",
-        icon: "pi pi-slack",
-      },
-      {
-        label: "Whatsapp",
-        icon: "pi pi-whatsapp",
-      },
-    ],
+    label: "ออกจากระบบ",
+    icon: "pi pi-sign-out",
   },
 ]);
 

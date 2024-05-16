@@ -91,8 +91,8 @@
                     <label for="howtopay">สรุปการชำระเงิน </label><br>
                     <label for="howtopay">ยอดค้างชำระทั้งหมด </label>
                     <div class="flex gap-3 mt-1">
-                        <Button label="ยกเลิก" severity="secondary" outlined class="w-full bg-[#FF0033] text-[#FFFFFF]" />
-                        <Button label="สร้างออเดอร์" class="w-full" />
+                        <Button label="ยกเลิก" severity="secondary" outlined class="w-full bg-[#FF0033] text-[#FFFFFF]" @click="goToBack"/>
+                        <Button label="สร้างออเดอร์" class="w-full" @click="goToCreateFinish"/>
                     </div>
                 </div>
             </div>
@@ -102,6 +102,17 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goToBack = () => {
+    router.push('/create');
+};
+
+const goToCreateFinish = () => {
+    router.push('/create');
+};
 
 const selectedOrder = ref();
 const order = ref([
