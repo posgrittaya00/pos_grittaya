@@ -30,6 +30,7 @@
           <InputText id="phone" v-model="value" class="w-[250px] h-[40px]"/>
         </div>
       </div>
+      <div class="bg-gray-300 w-[100px] h-full"></div>
     </div>
   </div>
 </template>
