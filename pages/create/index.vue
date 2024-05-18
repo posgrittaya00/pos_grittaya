@@ -2,11 +2,11 @@
     <div class="flex">
         <div class="pi pi-shopping-bag text-[16px] font-semibold mr-2 mt-2 rounded-t-lg bg-white p-4 ">ออเดอร์ทั้งหมด</div>
         <span class="relative">
-            <InputText v-model="value1" placeholder="ค้นหาออเดอร์" class="w-[300px] h-[40px] mr-2 mt-3"/>
-            <i class="pi pi-search absolute top-2/4 -mt-1 right-5 text-surface-400 dark:text-surface-600"/>
+            <InputText v-model="value1" placeholder="ค้นหาออเดอร์" class="w-[300px] h-[40px] mr-2 mt-3 pl-10 placeholder-shift" />
+          <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"/>
         </span>
         <span class="buttoncreate">
-            <Button label="สร้างออเดอร์" icon="pi pi-plus-circle" class="w-[200px] h-[40px] text-lg bg-[#326035] mr-2 mt-3"  @click="goToCreateOrder"/>
+            <Button label="สร้างออเดอร์" icon="pi pi-plus-circle" class="w-[200px] h-[40px] text-lg bg-[#326035] mr-4 mt-3"  @click="goToCreateOrder"/>
         </span>
     </div>
     <div class="flex">
@@ -30,8 +30,7 @@
                 <Column field="nameproduct" header="สถานะออเดอร์"></Column>
                 <Column field="quantity" header="ชื่อลูกค้า"></Column>
                 <Column field="unit" header="ช่องทางการสั่งซื้อ"></Column>
-                <Column field="price" header="การจัดส่ง"></Column>
-                <Column field="discount" header="ส่วนลด"></Column>
+                <Column field="price" header="รูปแบบการจัดส่ง"></Column>
                 <Column field="price" header="ยอดขาย"></Column>
                 <Column field="discount" header="หมายเหตุ"></Column>
             </DataTable>
