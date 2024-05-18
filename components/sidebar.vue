@@ -11,9 +11,9 @@ watch(() => route.path, (newPath) => {
 </script>
 
 <template>
-  <div class="flex h-screen">
+  <div class="bg-[#FFFFFF] flex h-screen">
     <!-- Sidebar -->
-    <div class="bg-[#FFFFFF] text-black w-[300px] flex-shrink-0">
+    <div class=" text-black w-[300px] flex-shrink-0">
       <ul class="w-full flex flex-col">
         <li :class="[
           'flex justify-center w-full items-center text-[24px]',

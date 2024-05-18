@@ -3,57 +3,10 @@
         <h1>Index Page</h1>
     </div>
 </template>
-  <!-- <div class="login-container"> -->
-  <!-- <h1>เข้าสู่ระบบ</h1>
-        <div class="input-container">
-            <label for ="">username</label>
-            <input type="text" name="ชื่อผู้ใช้" v-model="login.username"><br>
-        </div>
-        <div class="input-container">
-            <label for ="">password</label>
-            <input type="password" name="รหัสผ่าน" v-model="login.password"><br>
-            <p class="forget-container">ลืมรหัสผ่าน</p><br>
-        </div>
 
-        {{ login.username }}<br>
-        {{ login.password }}<br>
-
-        <div class="input-container">
-            <button @click="submitLogin">เข้าสู่ระบบ</button><br>
-        </div> -->
-  <!-- </div> -->
 
 <script setup lang="ts">
-// definePageMeta({
-//   layout: 'empty'
-// })
 
-// import { ref } from 'vue';
-// import { useRouter } from 'vue-router';
-
-// interface Login {
-//     username: string;
-//     password: string;
-// }
-
-// const login = ref<Login>(
-//     {
-//         username: 'jan',
-//         password: '11111'
-//     }
-// )
-
-// const router = useRouter();
-
-// const submitLogin = () => {
-//     // Simulate login logic
-//     if (login.value.username === 'jan' && login.value.password === '11111') {
-//         alert('Login successful!');
-//         router.push('/dashboard');
-//     } else {
-//         alert('Invalid username or password');
-//     }
-// }
 </script>
 
 <style lang="scss">
