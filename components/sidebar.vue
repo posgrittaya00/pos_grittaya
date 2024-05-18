@@ -11,7 +11,7 @@ watch(() => route.path, (newPath) => {
 </script>
 
 <template>
-  <div class="bg-[#FFFFFF] flex h-screen">
+  <div class="bg-[#FFFFFF] flex min-h-screen">
     <!-- Sidebar -->
     <div class=" text-black w-[300px] flex-shrink-0">
       <ul class="w-full flex flex-col">

@@ -1,8 +1,7 @@
 <template>
   <div>
     <header
-      class="lg:flex flex justify-between bg-[#FFFFFF] h-[100px] items-center drop-shadow-md"
-    >
+      class=" lg:flex flex justify-between bg-[#ffffff] backdrop-blur-sm  h-[100px] items-center drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       <nav class="navbar-logo">
         <img src="/img/grit.png" class="h-[75.63px]" alt="" />
       </nav>
@@ -13,10 +12,7 @@
           <strong class="mb-2">Peter boom</strong>
           <span>แอดมิน</span>
         </li>
-        <div
-          @click="toggle"
-          aria-haspopup="true"
-          aria-controls="overlay_tmenu"
+        <div @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu"
           class="ease cursor-pointer duration-100 card flex justify-center items-center w-8 h-8 rounded hover:bg-[#000000] hover:bg-opacity-20">
           <i class="pi pi-sort-down-fill cursor-pointer"></i>
           <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />

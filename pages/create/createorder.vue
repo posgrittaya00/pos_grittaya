@@ -1,114 +1,118 @@
 <template>
-    <div class="flex flex-col gap-2 h-screen overflow-scroll">
-        <!-- กล่องที่ 1 -->
-        <div class="flex">
-            <div
-                class="flex flex-col gap-4 w-full h-full text-[16px] font-semibold rounded-lg bg-[white] p-4 relative mt-2 mr-2">
-                <div class="flex justify-between">
-                    <span class="text-[18px]">ข้อมูลลูกค้า</span>
+    <div class="flex flex-col gap-2 min-h-screen items-center w-full py-5">
+        <div class="w-11/12 flex flex-col gap-2">
+            <!-- กล่องที่ 1 -->
+            <div class="flex flex-col bg-white w-full p-4">
+                <div class="flex justify-between mb-5">
+                    <span class="text-[18px] font-bold">ข้อมูลลูกค้า</span>
                     <span>จำหน่ายโดย : Peter boom</span>
                 </div>
-                <div class="flex justify-between">
-                    <div class="flex flex-col gap-2">
-                        <label for="username">ชื่อลูกค้า</label>
-                        <InputText id="username" v-model="value" class="w-[500px] h-[40px]" />
-                        <label for="address">ที่อยู่</label>
-                        <div class="card flex justify-content-center">
-                            <Textarea v-model="value" rows="5" cols="30" />
+                <div class="flex justify-between text-[16px] font-semibold rounded-lg bg-white">
+                    <div class="flex gap-2 w-full justify-evenly">
+                        <div class="flex flex-col gap-2">
+                            <label for="username">ชื่อลูกค้า</label>
+                            <InputText id="username" v-model="value" class="w-[500px] h-[40px]" />
+                            <label for="address">ที่อยู่</label>
+                            <div class="card flex justify-content-center">
+                                <Textarea v-model="value" rows="5" cols="30" />
+                            </div>
+                            <label for="zipcode">รหัสไปรษณีย์</label>
+                            <InputText id="zipcode" v-model="value" class="w-[500px] h-[40px]" />
                         </div>
-                        <label for="zipcode">รหัสไปรษณีย์</label>
-                        <InputText id="zipcode" v-model="value" class="w-[500px] h-[40px]" />
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="phone">เบอร์โทรศัพท์</label>
-                        <InputText id="phone" v-model="value" class="w-[500px] h-[40px]" />
-                        <label for="order">ช่องทางการสั่งซื้อ</label>
-                        <Dropdown v-model="selectedOrder" editable :options="order" optionLabel="name"
-                            class="w-[500px] h-[40px]" />
+                        <div class="flex flex-col gap-2">
+                            <label for="phone">เบอร์โทรศัพท์</label>
+                            <InputText id="phone" v-model="value" class="w-[500px] h-[40px]" />
+                            <label for="order">ช่องทางการสั่งซื้อ</label>
+                            <Dropdown v-model="selectedOrder" editable :options="order" optionLabel="name"
+                                class="w-[500px] h-[40px]" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- กล่องที่ 2 -->
-        <div class="flex">
-            <div
-                class="flex flex-col gap-4 w-full h-[1000px] text-[16px] font-semibold rounded-lg bg-[white] p-4 relative mt-2 mr-2">
-                <!-- box 1 -->
-                <div class="flex justify-between">
-                    <span class="text-[18px]">สินค้า</span>
-                </div>
-                <DataTable :value="products" tableStyle="min-width: 50rem">
-                    <Column field="number" header="ลำดับ"></Column>
-                    <Column field="codeproduct" header="รหัสสินค้า"></Column>
-                    <Column field="nameproduct" header="ชื่อสินค้า"></Column>
-                    <Column field="quantity" header="จำนวน"></Column>
-                    <Column field="unit" header="หน่วย"></Column>
-                    <Column field="price" header="ราคา(บาท)"></Column>
-                    <Column field="discount" header="ส่วนลด"></Column>
-                </DataTable>
-                <span class="buttoncreate">
-                    <Button label="เพิ่มแถวรายการ" icon="pi pi-plus-circle"
-                        class="w-[200px] h-[40px] text-lg bg-[#326035] mr-2 mt-3" @click="goToCreateOrder" />
-                </span>
-                <div class="border-t border-black mt-4 flex flex-col gap-2"></div>
-                <!-- box 2 -->
-                <div class="flex justify-between">
-                    <span class="text-[18px]">การจัดส่ง</span>
-                </div>
-                <div class="flex justify-between">
-                    <div class="flex flex-col gap-2">
-                        <label for="delivery">ช่องทางการจัดส่ง</label>
-                        <Dropdown v-model="selectedDelivery" editable :options="delivery" optionLabel="name"
-                            class="w-[500px] h-[40px]" />
-                        <label for="note">หมายเหตุ</label>
-                        <InputText id="note" v-model="value" class="w-[500px] h-[40px]" />
-                    </div>
-                </div>
-                <div class="border-t border-black mt-4"></div>
-                <!-- box 3 -->
-                <div class="flex justify-between">
-                    <span class="text-[18px]">การชำระเงิน</span>
-                </div>
-                <div class="flex justify-between">
-                    <div class="flex flex-col gap-2">
-                        <label for="payment">วิธีการชำระเงิน</label>
-                        <Dropdown v-model="selectedPayment" editable :options="payment" optionLabel="name"
-                            class="w-[500px] h-[40px]" />
+            <!-- กล่องที่ 2 -->
+            <div class="flex bg-white justify-center">
+                <div class="flex gap-4 text-[16px] font-semibold rounded-lg bg-[white] p-4 relative mt-2 mr-2">
+                    <div class="flex flex-col">
+                        <!-- box 1 -->
                         <div class="flex justify-between">
-                            <span class="text-[18px]">ผ่อนชำระ</span>
+                            <span class="text-[18px]">สินค้า</span>
                         </div>
-                        <label for="howtopay">วิธีการผ่อนชำระ</label>
-                        <InputText id="howtopay" v-model="value" class="w-[500px] h-[40px]" />
-                        <label for="installmentform">รูปแบบการผ่อนชำระ</label>
-                        <Dropdown v-model="selectedForm" editable :options="form" optionLabel="name"
-                            class="w-[500px] h-[40px]" />
+                        <DataTable :value="products" tableStyle="min-width: 50rem">
+                            <Column field="number" header="ลำดับ"></Column>
+                            <Column field="codeproduct" header="รหัสสินค้า"></Column>
+                            <Column field="nameproduct" header="ชื่อสินค้า"></Column>
+                            <Column field="quantity" header="จำนวน"></Column>
+                            <Column field="unit" header="หน่วย"></Column>
+                            <Column field="price" header="ราคา(บาท)"></Column>
+                            <Column field="discount" header="ส่วนลด"></Column>
+                        </DataTable>
+                        <span class="buttoncreate">
+                            <Button label="เพิ่มแถวรายการ" icon="pi pi-plus-circle"
+                                class="w-[200px] h-[40px] text-lg bg-[#326035] mr-2 mt-3" @click="goToCreateOrder" />
+                        </span>
+                        <div class="border-t border-black mt-4 flex flex-col gap-2"></div>
+                        <!-- box 2 -->
+                        <div class="flex justify-between">
+                            <span class="text-[18px]">การจัดส่ง</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="flex flex-col gap-2">
+                                <label for="delivery">ช่องทางการจัดส่ง</label>
+                                <Dropdown v-model="selectedDelivery" editable :options="delivery" optionLabel="name"
+                                    class="w-[500px] h-[40px]" />
+                                <label for="note">หมายเหตุ</label>
+                                <InputText id="note" v-model="value" class="w-[500px] h-[40px]" />
+                            </div>
+                        </div>
+                        <div class="border-t border-black mt-4"></div>
                     </div>
-                    <div>
-                        <Card style="width: 25rem; overflow: hidden">
-                            <template #subtitle>ชำระครั้งที่ </template>
-                            <template #content>
-                                <InputText id="money" v-model="value" class="w-[350px] h-[40px]" />
-                                <label for="remaining">คงเหลือ </label> <label for="remaining">จากยอดรวม </label>
-                            </template>
-                            <template #footer>
-                                <div class="flex gap-3 mt-1">
-                                    <Button label="บันทึก" class="w-full" />
-                                </div>
-                            </template>
-                        </Card>
-                        <label for="howtopay">รวมการสั่งซื้อ </label><br>
-                        <label for="howtopay">ค่าส่ง </label><br>
-                        <label for="howtopay">สรุปการชำระเงิน </label><br>
-                        <label for="howtopay">ยอดค้างชำระทั้งหมด </label>
-                        <div class="flex gap-3 mt-1">
-                            <Button label="ยกเลิก" severity="secondary" outlined
-                                class="w-full bg-[#FF0033] text-[#FFFFFF]" @click="goToBack" />
-                            <Button label="สร้างออเดอร์" class="w-full" @click="goToCreateFinish" />
+                    <div class="flex flex-col gap-3">
+                        <!-- box 3 -->
+                        <div class="flex gap-3 justify-between">
+                            <span class="text-[18px]">การชำระเงิน</span>
+                        </div>
+                        <div class="flex flex-col ">
+                            <label for="payment">วิธีการชำระเงิน</label>
+                            <Dropdown v-model="selectedPayment" editable :options="payment" optionLabel="name"
+                                class="w-[500px] h-[40px]" />
+                            <div class="flex justify-between">
+                                <span class="text-[18px]">ผ่อนชำระ</span>
+                            </div>
+                            <label for="howtopay">วิธีการผ่อนชำระ</label>
+                            <InputText id="howtopay" v-model="value" class="w-[500px] h-[40px]" />
+                            <label for="installmentform">รูปแบบการผ่อนชำระ</label>
+                            <Dropdown v-model="selectedForm" editable :options="form" optionLabel="name"
+                                class="w-[500px] h-[40px]" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <Card style="width: 25rem; overflow: hidden">
+                                <template #subtitle>ชำระครั้งที่ </template>
+                                <template #content>
+                                    <InputText id="money" v-model="value" class="w-[350px] h-[40px]" />
+                                    <label for="remaining">คงเหลือ </label> <label for="remaining">จากยอดรวม
+                                    </label>
+                                </template>
+                                <template #footer>
+                                    <div class="flex gap-3 mt-1">
+                                        <Button label="บันทึก" class="w-full" />
+                                    </div>
+                                </template>
+                            </Card>
+                            <label for="howtopay">รวมการสั่งซื้อ </label><br>
+                            <label for="howtopay">ค่าส่ง </label><br>
+                            <label for="howtopay">สรุปการชำระเงิน </label><br>
+                            <label for="howtopay">ยอดค้างชำระทั้งหมด </label>
+                            <div class="flex gap-3 mt-1">
+                                <Button label="ยกเลิก" severity="secondary" outlined
+                                    class="w-full bg-[#FF0033] text-[#FFFFFF]" @click="goToBack" />
+                                <Button label="สร้างออเดอร์" class="w-full" @click="goToCreateFinish" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
