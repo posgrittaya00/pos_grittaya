@@ -14,7 +14,7 @@
                         <InputText id="username" v-model="value" class="w-[500px] h-[40px]" />
                         <label for="address">ที่อยู่</label>
                         <div class="card flex justify-content-center">
-                            <Textarea v-model="value" rows="5" cols="30" />
+                            <Textarea v-model="value" rows="5" cols="30" class="w-[500px]"/>
                         </div>
                         <label for="zipcode">รหัสไปรษณีย์</label>
                         <InputText id="zipcode" v-model="value" class="w-[500px] h-[40px]" />
@@ -45,6 +45,7 @@
                     <Column field="unit" header="หน่วย"></Column>
                     <Column field="price" header="ราคา(บาท)"></Column>
                     <Column field="discount" header="ส่วนลด"></Column>
+                    <Column field="total" header="รวม"></Column>
                 </DataTable>
                 <span class="buttoncreate">
                     <Button label="เพิ่มแถวรายการ" icon="pi pi-plus-circle"
