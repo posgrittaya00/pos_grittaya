@@ -33,7 +33,13 @@
           <InputText id="phone" v-model="value" class="w-[250px] h-[40px]" />
         </div>
       </div>
-      <div class="bg-gray-300 w-[300px] h-full rounded-md"></div>
+      <div class="container">
+        <div class="bg-gray-300 w-[250px] h-full rounded-md flex justify-center items-center">
+          <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
+          <div>เพิ่มรูปภาพสินค้า</div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </template>
