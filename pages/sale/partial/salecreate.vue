@@ -39,8 +39,8 @@
       </div>
     </div>
     <div class="flex gap-3 mt-1">
-      <Button label="ยกเลิก" severity="secondary" outlined class="flex-grow w-[80px]" @click="_" />
-      <Button label="สร้างออเดอร์" class="flex-grow w-[80px]"  @click="_" />
+      <Button label="ยกเลิก" severity="danger" class="flex-grow w-[80px]" @click="_" />
+      <Button label="บันทึก" class="flex-grow w-[80px]"  @click="_" />
     </div>
   </div>
 </template>
