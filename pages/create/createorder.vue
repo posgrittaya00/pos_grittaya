@@ -33,7 +33,7 @@
                 <!-- แถวที่ 1 -->
                 <div class="text-[18px] font-semibold mb-5">สินค้า</div>
                 <DataTable :value="products" tableStyle="min-width: 50rem">
-                    <Column field="number" header="ลำดับ"></Column>
+                    <Column field="number" header="number"></Column>
                     <Column field="codeproduct" header="รหัสสินค้า"></Column>
                     <Column field="nameproduct" header="ชื่อสินค้า"></Column>
                     <Column field="quantity" header="จำนวน"></Column>
