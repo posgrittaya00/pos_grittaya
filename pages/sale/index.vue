@@ -16,21 +16,21 @@ definePageMeta({
 <template>
   <div class="flex gap-2 mt-5">
     <div
-      class="flex flex-col gap-4 w-[800px] h-[300px] text-[16px] font-semibold rounded-b-lg rounded-tr-lg bg-[white] relative ">
+      class="flex flex-col gap-4 w-[1200px] h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
       <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
         <div class="px-3">
           <div class="flex justify-between gap-5 items-center">
             <span>
               <Dropdown v-model="selectedCity" editable :options="cities" optionLabel="name" placeholder="สถานะ"
-                class="w-full md:w-[8rem]" />
+                class="w-full md:w-[8rem] h-[40px]" />
             </span>
             <span>
               <Dropdown v-model="selectedCity" editable :options="cities" optionLabel="name" placeholder="หมวดหมู่"
-                class="w-full md:w-[9rem]" />
+                class="w-full md:w-[9rem] h-[40px]" />
             </span>
             <span class="relative">
               <InputText v-model="value1" placeholder="ค้นหาออเดอร์"
-                class="w-[300px] h-[43px] mr-2 pl-10 placeholder-shift" :pt="{
+                class="w-[700px] h-[40px] mr-2 pl-10 placeholder-shift" :pt="{
                   root: ({ props, context, parent }) => {
                     var _a;
                     return {
@@ -84,11 +84,9 @@ definePageMeta({
             </span>
           </div>
         </div>
-
       </div>
-      <div class="flex w-full">
-        <div class="flex w-full justify-evenly bg-[#FFFFFF] text-[#000000] rounded-lg p-2">
-          <DataTable :value="products" tableStyle="min-width: 48rem">
+        <div class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2">
+          <DataTable :value="products" tableStyle="min-width: 50rem">
             <Column field="code" header="รหัสสินค้า"></Column>
             <Column field="name" header="ชื่อสินค้า"></Column>
             <Column field="price" header="ราคา"></Column>
@@ -98,14 +96,13 @@ definePageMeta({
             <Column field="status" header="สถานะ"></Column>
           </DataTable>
         </div>
-      </div>
     </div>
     <div :class="[
       'ease-in-out',
       'duration-200',
       { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
     ]">
-      <salecreate :open="OpenSaleCreate" />
+      <salecreate :open="OpenSaleCreate" /> 
     </div>
   </div>
 </template>

@@ -23,7 +23,7 @@
                 </svg>
                 </span>
             </div>
-        <div class="flex flex-col gap-4 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-4 relative mr-2">
+        <div class="flex flex-col gap-4 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-2 relative">
             <DataTable :value="products" tableStyle="min-width: 50rem">
                 <Column field="number" header="รหัสออเดอร์"></Column>
                 <Column field="codeproduct" header="วันที่สั่งซื้อ"></Column>
