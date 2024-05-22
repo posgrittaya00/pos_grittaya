@@ -46,10 +46,61 @@
 </template>
 
 
-<script setup>
+<script>
 import { ref, defineProps } from 'vue';
 defineProps({
   open: Boolean,
 })
 const text = ref('เพิ่มรายการสินค้า');
+import Swal from 'sweetalert2'
+export default {
+  data () {
+    return {
+      productCode: '',
+      productName: '',
+      price: '',
+      unit: '',
+      quantity: '',
+      category: '',
+      
+    }
+  },
+  methods: {
+    async createProduct () {
+      await this.$axios
+        .post('http://localhost:8000/api/auth/register', {
+          productCode: this.productCode,
+          productName: this.productName,
+          price: this.price,
+          unit: this.unit,
+          quantity: this.quantity,
+          category: this.category,
+
+        })
+        .then(function (response) {
+          if (response.status === 201) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'You have successfully added product ',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.value) {
+                window.location.href = 'http://localhost:3000/sale'
+              }
+            })
+          }
+        })
+        .catch(function (error) {
+          if (error.response.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Please correct your information'
+            })
+          }
+        })
+    }
+  }
+}
 </script>
