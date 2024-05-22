@@ -11,17 +11,17 @@
                     <div class="flex gap-2 w-full">
                         <div class="flex flex-col gap-2">
                             <label for="username">ชื่อลูกค้า</label>
-                            <InputText id="username" v-model="value" class="w-[500px] h-[40px]" />
+                            <InputText id="username" v-model="username" class="w-[500px] h-[40px]" />
                             <label for="address">ที่อยู่</label>
                             <div class="card flex justify-content-center">
-                                <Textarea v-model="value" rows="5" cols="30" class="w-[500px]"/>
+                                <Textarea v-model="address" rows="5" cols="30" class="w-[500px]"/>
                             </div>
                             <label for="zipcode">รหัสไปรษณีย์</label>
-                            <InputText id="zipcode" v-model="value" class="w-[500px] h-[40px]" />
+                            <InputText id="zipcode" v-model="zipcode" class="w-[500px] h-[40px]" />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="phone">เบอร์โทรศัพท์</label>
-                            <InputText id="phone" v-model="value" class="w-[500px] h-[40px]" />
+                            <InputText id="phone" v-model="phone" class="w-[500px] h-[40px]" />
                             <label for="order">ช่องทางการสั่งซื้อ</label>
                             <Dropdown v-model="selectedOrder" editable :options="order" optionLabel="name" class="w-[500px] h-[40px]" />
                         </div>
@@ -50,7 +50,7 @@
                         <label for="delivery">ช่องทางการจัดส่ง</label>
                         <Dropdown v-model="selectedDelivery" editable :options="delivery" optionLabel="name" class="w-[500px] h-[40px]" />
                         <label for="note">หมายเหตุ</label>
-                        <InputText id="note" v-model="value" class="w-[500px] h-[40px]" />
+                        <InputText id="note" v-model="note" class="w-[500px] h-[40px]" />
                     </div>
                     <div class="border-t border-black mt-4"></div>
                 </div>
@@ -63,7 +63,7 @@
                                 <Dropdown v-model="selectedPayment" editable :options="payment" optionLabel="name" class="w-[500px] h-[40px] mb-2" />
                                 <div class="text-[18px] font-semibold mb-5">ผ่อนชำระ</div>
                                     <label for="howtopay">วิธีการผ่อนชำระ</label>
-                                    <InputText id="howtopay" v-model="value" class="w-[500px] h-[40px]" />
+                                    <InputText id="howtopay" v-model="howtopay" class="w-[500px] h-[40px]" />
                                     <label for="installmentform">รูปแบบการผ่อนชำระ</label>
                                     <Dropdown v-model="selectedForm" editable :options="form" optionLabel="name" class="w-[500px] h-[40px]" />
                                 </div>
@@ -72,7 +72,7 @@
                         <Card style="width: 25rem; overflow: hidden">
                             <template #subtitle>ชำระครั้งที่</template>
                             <template #content>
-                                <InputText id="money" v-model="value" class="w-[350px] h-[40px]" />
+                                <InputText id="money" v-model="money" class="w-[350px] h-[40px]" />
                                 <label for="remaining">คงเหลือจากยอดรวม</label>
                             </template>
                             <template #footer>
@@ -81,10 +81,10 @@
                                 </div>
                             </template>
                         </Card>
-                        <label for="howtopay">รวมการสั่งซื้อ</label>
-                        <label for="howtopay">ค่าส่ง</label>
-                        <label for="howtopay">สรุปการชำระเงิน</label>
-                        <label for="howtopay">ยอดค้างชำระทั้งหมด</label>
+                        <label for="allOrders">รวมการสั่งซื้อ</label>
+                        <label for="cost">ค่าส่ง</label>
+                        <label for="summarize">สรุปการชำระเงิน</label>
+                        <label for="elite">ยอดค้างชำระทั้งหมด</label>
                         <div class="flex gap-3 mt-1">
                             <Button label="ยกเลิก" severity="secondary" outlined class="w-full" @click="goToBack" />
                             <Button label="สร้างออเดอร์" class="w-full" @click="goToCreateFinish" />
