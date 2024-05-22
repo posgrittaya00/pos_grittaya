@@ -3,7 +3,7 @@
         <div class="pi pi-shopping-bag text-[16px] font-semibold mr-2 mt-2 rounded-t-lg bg-white p-4 ">ออเดอร์ทั้งหมด</div>
         <span class="relative">
             <InputText v-model="value1" placeholder="ค้นหาออเดอร์" class="w-[300px] h-[40px] mr-2 mt-3 pl-10 placeholder-shift" />
-          <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"/>
+            <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"/>
         </span>
         <span class="buttoncreate">
             <Button label="สร้างออเดอร์" icon="pi pi-plus-circle" class="w-[200px] h-[40px] text-lg bg-[#326035] mr-4 mt-3"  @click="goToCreateOrder"/>
