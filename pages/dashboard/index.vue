@@ -47,21 +47,19 @@
                 </div>
             </div>
         </div>
-
         <!-- Line 2 -->
         <div class="flex w-full">
-            <div class="w-3/5 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2" style="height: 532px;">
+            <div class="w-3/5 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2" style="height: 500px;">
                 <h3 class="text-lg font-semibold mb-2">สถิติการขาย</h3>
                 <p class="text-2xl font-bold">รายได้เฉลี่ยต่อวัน: 50,000 บาท</p>
                 <p class="text-2xl font-bold">จำนวนคำสั่งซื้อเฉลี่ยต่อวัน: 10 รายการ</p>
             </div>
-            <div class="w-2/5 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2" style="height: 532px;">
+            <div class="w-2/5 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2" style="height: 500px;">
                 <h3 class="text-lg font-semibold mb-2">สินค้าขายดี</h3>
                 <p class="text-2xl font-bold">1. Product A</p>
                 <p class="text-2xl font-bold">2. Product B</p>
             </div>
         </div>
-
         <!-- Line 3 -->
         <div class="w-3/5 bg-white p-4 rounded-lg shadow-lg text-black mr-2 mb-2" style="height: auto;">
             <h3 class="text-lg font-semibold mb-2">ประวัติการทำรายการ</h3>
@@ -70,7 +68,6 @@
             <p class="text-2xl font-bold">วันที่ 03/05/2024: รายการใหม่ 20 รายการ</p>
         </div>
     </div>
-
 </template>
 
 <script setup>

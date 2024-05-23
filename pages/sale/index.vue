@@ -14,7 +14,7 @@ definePageMeta({
 
 
 <template>
-  <div class="flex gap-2 mt-5">
+  <div class="flex gap-2 mt-2">
     <div
       class="flex flex-col gap-4 w-[1200px] h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
       <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
