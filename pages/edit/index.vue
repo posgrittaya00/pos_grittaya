@@ -29,7 +29,7 @@
 <script setup>
 const selectedCategory = ref();
 const category = ref([
-    { name: 'เครื่องดื่ม', code: 'DRINK' }, //อย่าลืมแก้
+    { name: 'ของใช้ทั่วไป', code: 'IT' }, //อย่าลืมแก้
     { name: 'อาหารแห้ง', code: 'DF' }
 ]);
 </script>

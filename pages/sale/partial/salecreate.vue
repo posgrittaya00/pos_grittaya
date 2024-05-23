@@ -8,27 +8,27 @@
       <div class="flex flex-col gap-2">
         <div class="flex flex-col gap-1 mt-1">
           <label for="product-code">รหัสสินค้า</label>
-          <InputText id="product-code" v-model="productCode" class="w-[250px] h-[40px]" />
+          <InputText id="product-code" v-model="productCode" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
           <label for="product-name">ชื่อสินค้า</label>
-          <InputText id="product-name" v-model="productName" class="w-[250px] h-[40px]" />
+          <InputText id="product-name" v-model="productName" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
           <label for="price">ราคา</label>
-          <InputText id="price" v-model="price" class="w-[250px] h-[40px]" />
+          <InputText id="price" v-model="price" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
           <label for="unit">หน่วย</label>
-          <InputText id="unit" v-model="unit" class="w-[250px] h-[40px]" />
+          <InputText id="unit" v-model="unit" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
           <label for="quantity">จำนวน</label>
-          <InputText id="quantity" v-model="quantity" class="w-[250px] h-[40px]" />
+          <InputText id="quantity" v-model="quantity" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
           <label for="category">หมวดหมู่</label>
-          <InputText id="category" v-model="category" class="w-[250px] h-[40px]" />
+          <InputText id="category" v-model="category" class="w-[200px] h-[40px]" />
         </div>
       </div>
       <div class="container">
