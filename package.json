@@ -15,7 +15,7 @@
     "primevue": "^3.52.0",
     "sweetalert2": "^11.11.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
