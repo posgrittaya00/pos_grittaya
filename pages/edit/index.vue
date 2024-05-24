@@ -3,7 +3,7 @@
     <div class="flex">
         <div class="flex flex-col gap-4 w-full h-[70px] text-[16px] font-semibold rounded-t-lg bg-[white] p-4 relative mt-2 mr-2">
             <div class="flex justify-between">
-                <Dropdown v-model="selectedCategory" editable :options="category" optionLabel="name" class="w-[250px] h-[40px] mt-3"/>
+                <Dropdown v-model="selectedCategory" editable :options="category" optionLabel="name" placeholder="หมวดหมู่คลังสินค้า" class="w-[250px] h-[40px] mt-3"/>
                 <span class="relative" iconPosition="left">
                     <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"/>
                     <InputText v-model="value1" placeholder="ค้นหาสินค้า" class="w-[900px] h-[40px] mr-2 mt-3 pl-10 placeholder-shift"/>
