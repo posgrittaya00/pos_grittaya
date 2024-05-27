@@ -7,28 +7,28 @@
     <div class="flex justify-between gap-2 flex-grow">
       <div class="flex flex-col gap-2">
         <div class="flex flex-col gap-1 mt-1">
-          <label for="product-code">รหัสสินค้า</label>
-          <InputText id="product-code" v-model="productCode" class="w-[200px] h-[40px]" />
+          <label for="ID">รหัสสินค้า</label>
+          <InputText id="ID" v-model="ID" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
-          <label for="product-name">ชื่อสินค้า</label>
-          <InputText id="product-name" v-model="productName" class="w-[200px] h-[40px]" />
+          <label for="Name">ชื่อสินค้า</label>
+          <InputText id="Name" v-model="Name" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
-          <label for="price">ราคา</label>
-          <InputText id="price" v-model="price" class="w-[200px] h-[40px]" />
+          <label for="UnitPrice">ราคา</label>
+          <InputText id="UnitPrice" v-model="UnitPrice" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
-          <label for="unit">หน่วย</label>
-          <InputText id="unit" v-model="unit" class="w-[200px] h-[40px]" />
+          <label for="Type">หน่วย</label>
+          <InputText id="Type" v-model="Type" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
-          <label for="quantity">จำนวน</label>
-          <InputText id="quantity" v-model="quantity" class="w-[200px] h-[40px]" />
+          <label for="Amount">จำนวน</label>
+          <InputText id="Amount" v-model="Amount" class="w-[200px] h-[40px]" />
         </div>
         <div class="flex flex-col gap-1 mt-1">
-          <label for="category">หมวดหมู่</label>
-          <InputText id="category" v-model="category" class="w-[200px] h-[40px]" />
+          <label for="Category">หมวดหมู่</label>
+          <InputText id="Category" v-model="Category" class="w-[200px] h-[40px]" />
         </div>
       </div>
       <div class="container">
@@ -56,25 +56,24 @@ import Swal from 'sweetalert2'
 export default {
   data () {
     return {
-      productCode: '',
-      productName: '',
-      price: '',
-      unit: '',
-      quantity: '',
-      category: '',
-      
+      ID: '',
+      Name: '',
+      UnitPrice: '',
+      Type: '',
+      Amount: '',
+      Category: '',
     }
   },
   methods: {
     async createProduct () {
       await this.$axios
         .post('http://localhost:8000/api/auth/register', {
-          productCode: this.productCode,
-          productName: this.productName,
-          price: this.price,
-          unit: this.unit,
-          quantity: this.quantity,
-          category: this.category,
+          ID: this.ID,
+          Name: this.Name,
+          UnitPrice: this.UnitPrice,
+          Type: this.Type,
+          Amount: this.Amount,
+          Category: this.Category,
 
         })
         .then(function (response) {

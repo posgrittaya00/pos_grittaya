@@ -1,38 +1,53 @@
 <script setup>
+import { ref } from "vue";
 import { useRouter } from 'vue-router';
 import salecreate from './new/stockcreate.vue';
 const router = useRouter();
 const OpenSaleCreate = ref(true)
+const addproduct = ref(false)
 const goTosalecreate = () => {
+  addproduct.value = !addproduct.value;
   OpenSaleCreate.value = !OpenSaleCreate.value;
 };
-
-const selectedCateproduct = ref();
-const cateproduct = ref([
-    { name: 'คลังสินค้าที่ขาย', code: 'SA' }, //อย่าลืมแก้
-    { name: 'คลังสินค้าที่สต็อก', code: 'ST' }
-]);
 
 definePageMeta({
   layout: 'default'
 })
+
+const selectedStatus = ref();
+const status = ref([
+    { name: 'พร้อมขาย', code: 'Y' }, //อย่าลืมแก้
+    { name: 'ไม่พร้อมขาย', code: 'N' }
+]);
+
+const selectedCategory = ref();
+const category = ref([
+    { name: 'ของใช้ทั่วไป', code: 'IT' }, //อย่าลืมแก้
+    { name: 'อาหารแห้ง', code: 'DF' }
+]);
 </script>
 
 
 <template>
   <div class="flex gap-2 mt-2">
+    
     <div
-      class="flex flex-col gap-4 w-[700px] h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
+      :class="addproduct == true ? 'w-[700px]' : 'w-full'"
+      class="flex flex-col gap-4 w-full h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
       <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
         <div class="px-3">
           <div class="flex justify-between gap-5 items-center">
             <span>
-              <Dropdown v-model="selectedCateproduct" editable :options="cateproduct" optionLabel="name" placeholder="หมวดหมู่คลังสินค้า"
-                class="w-full w-[100px] h-[40px]" />
+              <Dropdown v-model="selectedStatus" editable :options="status" optionLabel="name" placeholder="สถานะ"
+                class="w-full md:w-[8rem] h-[40px]" />
+            </span>
+            <span>
+              <Dropdown v-model="selectedCategory" editable :options="category" optionLabel="name" placeholder="หมวดหมู่"
+                class="w-full md:w-[9rem] h-[40px]" />
             </span>
             <span class="relative">
               <InputText v-model="value1" placeholder="ค้นหาสินค้า"
-                class="w-[300px] h-[40px] mr-2 pl-10 placeholder-shift" :pt="{
+                class="w-[230px] h-[40px] mr-2 pl-10 placeholder-shift" :pt="{
                   root: ({ props, context, parent }) => {
                     var _a;
                     return {
@@ -99,7 +114,9 @@ definePageMeta({
           </DataTable>
         </div>
     </div>
-    <div :class="[
+    <div 
+    v-if="addproduct"
+    :class="[
       'ease-in-out',
       'duration-200',
       { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
