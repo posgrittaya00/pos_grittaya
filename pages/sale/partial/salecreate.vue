@@ -4,47 +4,51 @@
     <div class="card flex justify-center">
       <span class="max-w-full w-full text-center py-2 rounded-full border border-black text-[18px]">เพิ่มสินค้า</span>
     </div>
-    <div class="flex justify-between gap-2 flex-grow">
-      <div class="flex flex-col gap-2">
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="ID">รหัสสินค้า</label>
-          <InputText id="ID" v-model="ID" class="w-[200px] h-[40px]" />
+    <from @submit.prevent="create_product">
+      <div class="flex justify-between gap-2 flex-grow">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="ID">รหัสสินค้า</label>
+            {{ Name }}
+            <InputText id="ID" v-model="ID" class="w-[200px] h-[40px]" />
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="Name">ชื่อสินค้า</label>
+            <InputText id="Name" v-model="Name" class="w-[200px] h-[40px]" />
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="UnitPrice">ราคา</label>
+            <InputText id="UnitPrice" v-model="UnitPrice" class="w-[200px] h-[40px]" />
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="Type">หน่วย</label>
+            <InputText id="Type" v-model="Type" class="w-[200px] h-[40px]" />
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="Amount">จำนวน</label>
+            <InputText id="Amount" v-model="Amount" class="w-[200px] h-[40px]" />
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <label for="Category">หมวดหมู่</label>
+            <InputText id="Category" v-model="Category" class="w-[200px] h-[40px]" />
+          </div>
         </div>
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="Name">ชื่อสินค้า</label>
-          <InputText id="Name" v-model="Name" class="w-[200px] h-[40px]" />
-        </div>
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="UnitPrice">ราคา</label>
-          <InputText id="UnitPrice" v-model="UnitPrice" class="w-[200px] h-[40px]" />
-        </div>
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="Type">หน่วย</label>
-          <InputText id="Type" v-model="Type" class="w-[200px] h-[40px]" />
-        </div>
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="Amount">จำนวน</label>
-          <InputText id="Amount" v-model="Amount" class="w-[200px] h-[40px]" />
-        </div>
-        <div class="flex flex-col gap-1 mt-1">
-          <label for="Category">หมวดหมู่</label>
-          <InputText id="Category" v-model="Category" class="w-[200px] h-[40px]" />
+        <div class="container">
+          <div class="bg-gray-300 w-[250px] h-[475px] rounded-md flex justify-center items-center">
+            <button class="flex items-center" onclick="document.getElementById('productImageInput').click()">
+            <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
+            <div>เพิ่มรูปภาพสินค้า</div>
+            </button>
+            <input type="file" id="productImageInput" ref="productImageInput" style="display: none;" @change="handleFileChange" accept="image/*">
+          </div>
         </div>
       </div>
-      <div class="container">
-        <div class="bg-gray-300 w-[250px] h-[475px] rounded-md flex justify-center items-center">
-          <button class="flex items-center" onclick="document.getElementById('productImageInput').click()">
-          <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
-          <div>เพิ่มรูปภาพสินค้า</div>
-          </button>
-          <input type="file" id="productImageInput" ref="productImageInput" style="display: none;" @change="handleFileChange" accept="image/*">
-        </div>
+      <div class="flex gap-3 mt-1">
+        <Button type="button" label="ยกเลิก" severity="danger" class="flex-grow w-[80px]" @click="_" />
+        <Button type="submit" label="บันทึก" class="flex-grow w-[80px]" />
       </div>
-    </div>
-    <div class="flex gap-3 mt-1">
-      <Button label="ยกเลิก" severity="danger" class="flex-grow w-[80px]" @click="_" />
-      <Button label="บันทึก" class="flex-grow w-[80px]"  @click="create_product" />
-    </div>
+      
+    </from>
   </div>
 </template>
 
@@ -189,11 +193,12 @@ export default {
       Type: '',
       Amount: '',
       Category: ''
-    }
+    } 
   },
   methods: {
-    async create_product () {
-      await this.$axios
+     create_product () { 
+      console.log('tes',this.Name);
+       this.$axios
         .post('http://localhost:8000//api/products/CreateProduct', {
           ID: this.ID,
           Name: this.Name,
