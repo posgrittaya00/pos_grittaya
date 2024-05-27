@@ -29,7 +29,7 @@ const category = ref([
 
 
 <template>
-  <div class="flex gap-2 mt-2">
+  <div class="flex gap-2 mt-2 mr-2">
     
     <div
       :class="addproduct == true ? 'w-[700px]' : 'w-full'"
@@ -103,7 +103,7 @@ const category = ref([
         </div>
       </div>
         <div class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2">
-          <DataTable :value="products" tableStyle="min-width: 50rem">
+          <DataTable :value="products" tableStyle="min-width: 40rem">
             <Column field="code" header="รหัสสินค้า"></Column>
             <Column field="name" header="ชื่อสินค้า"></Column>
             <Column field="price" header="ราคา"></Column>
