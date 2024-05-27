@@ -29,8 +29,8 @@
 <script setup>
 const selectedCategory = ref();
 const category = ref([
-    { name: 'ของใช้ทั่วไป', code: 'IT' }, //อย่าลืมแก้
-    { name: 'อาหารแห้ง', code: 'DF' }
+    { name: 'คลังสินค้าที่ขาย', code: 'SA' }, //อย่าลืมแก้
+    { name: 'คลังสินค้าที่สต็อก', code: 'ST' }
 ]);
 </script>
 
