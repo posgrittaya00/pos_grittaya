@@ -33,8 +33,11 @@
       </div>
       <div class="container">
         <div class="bg-gray-300 w-[250px] h-full rounded-md flex justify-center items-center">
+          <button class="flex items-center" onclick="document.getElementById('productImageInput').click()">
           <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
           <div>เพิ่มรูปภาพสินค้า</div>
+          </button>
+          <input type="file" id="productImageInput" style="display: none;" onchange="handleFileChange(event)" accept="image/*">
         </div>
       </div>
     </div>
@@ -100,6 +103,15 @@ export default {
           }
         })
     }
+  }
+}
+
+function handleFileChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    alert('คุณได้เลือกไฟล์: ' + file.name);
+    // คุณสามารถเพิ่มฟังก์ชันการทำงานที่ต้องการได้ที่นี่
+    // เช่น แสดงภาพที่เลือก, อัพโหลดไฟล์ไปยังเซิร์ฟเวอร์, เป็นต้น
   }
 }
 </script>
