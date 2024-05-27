@@ -4,7 +4,9 @@ import { useRouter } from 'vue-router';
 import salecreate from './partial/salecreate.vue';
 const router = useRouter();
 const OpenSaleCreate = ref(true)
+const addproduct = ref(false)
 const goTosalecreate = () => {
+  addproduct.value = !addproduct.value;
   OpenSaleCreate.value = !OpenSaleCreate.value;
 };
 
@@ -28,8 +30,10 @@ const category = ref([
 
 <template>
   <div class="flex gap-2 mt-2">
+    
     <div
-      class="flex flex-col gap-4 w-[700px] h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
+      :class="addproduct == true ? 'w-[700px]' : 'w-full'"
+      class="flex flex-col gap-4 w-full h-[300px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative ">
       <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
         <div class="px-3">
           <div class="flex justify-between gap-5 items-center">
