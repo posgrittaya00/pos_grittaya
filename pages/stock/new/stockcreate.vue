@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="container">
-        <div class="bg-gray-300 w-[250px] h-full rounded-md flex justify-center items-center">
+        <div class="bg-gray-300 w-[250px] h-[475px] rounded-md flex justify-center items-center">
           <button class="flex items-center" onclick="document.getElementById('productImageInput').click()">
           <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
           <div>เพิ่มรูปภาพสินค้า</div>
