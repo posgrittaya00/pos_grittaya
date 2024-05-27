@@ -5,8 +5,10 @@ import salecreate from './new/stockcreate.vue';
 const router = useRouter();
 const OpenSaleCreate = ref(true)
 const addproduct = ref(false)
+const addsearch = ref(false)
 const goTosalecreate = () => {
   addproduct.value = !addproduct.value;
+  addsearch.value = !addsearch.value;
   OpenSaleCreate.value = !OpenSaleCreate.value;
 };
 
@@ -47,7 +49,9 @@ const category = ref([
             </span>
             <span class="relative">
               <InputText v-model="value1" placeholder="ค้นหาสินค้า"
-                class="w-[230px] h-[40px] mr-2 pl-10 placeholder-shift" :pt="{
+                class="w-[700px] h-[40px] mr-2 pl-10 placeholder-shift" 
+                :class="addsearch == false ? 'w-[230px]' : 'w-full'"
+                :pt="{
                   root: ({ props, context, parent }) => {
                     var _a;
                     return {
