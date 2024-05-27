@@ -114,7 +114,9 @@ const category = ref([
           </DataTable>
         </div>
     </div>
-    <div :class="[
+    <div 
+    v-if="addproduct"
+    :class="[
       'ease-in-out',
       'duration-200',
       { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
