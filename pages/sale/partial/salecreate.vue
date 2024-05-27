@@ -37,13 +37,13 @@
           <span class="pi pi-plus-circle" style="font-size: 2rem;"></span>
           <div>เพิ่มรูปภาพสินค้า</div>
           </button>
-          <input type="file" id="productImageInput" style="display: none;" onchange="handleFileChange(event)" accept="image/*">
+          <input type="file" id="productImageInput" ref="productImageInput" style="display: none;" @change="handleFileChange" accept="image/*">
         </div>
       </div>
     </div>
     <div class="flex gap-3 mt-1">
       <Button label="ยกเลิก" severity="danger" class="flex-grow w-[80px]" @click="_" />
-      <Button label="บันทึก" class="flex-grow w-[80px]"  @click="_" />
+      <Button label="บันทึก" class="flex-grow w-[80px]"  @click="create_product" />
     </div>
   </div>
 </template>
@@ -56,6 +56,130 @@ defineProps({
 })
 const text = ref('เพิ่มรายการสินค้า');
 import Swal from 'sweetalert2'
+import { useRouter } from 'vue-router';
+import cookies from 'js-cookie';
+import Multiselect from 'vue-multiselect'
+// export default {
+//   components: {
+//     Multiselect
+//   },
+//   layout: 'default',
+//   data () {
+//     return {
+//       ID: '',
+//       Name: '',
+//       UnitPrice: '',
+//       Type: '',
+//       Amount: '',
+//       Category: '',
+//       file: null,
+//     }
+//   },
+//   method: {
+//     async create_product () {
+//         const ID = productNames.join(', ')
+  
+//         const config = {
+//           headers: { Authorization: `Bearer ${cookies.get('token')}` }
+//         }
+  
+//         const formData = new FormData()
+//         if (this.file === null) {
+//           formData.append('ID', ID)
+//           formData.append('Name', this.Name)
+//           formData.append('UnitPrice', this.UnitPrice)
+//           formData.append('Type', this.Type)
+//           formData.append('Amount', this.Amount)
+//           formData.append('Category', this.Category)
+//           formData.append('attach_file', '')
+//           await this.$axios
+//             .post('http://localhost:8000/api/products/CreateProduct', formData, config)
+//             .then((response) => {
+//               if (response.status === 201) {
+//                 Swal.fire({
+//                   icon: 'success',
+//                   title: 'Success',
+//                   text: 'Product created successfully',
+//                   confirmButtonText: 'Ok'
+//                 })
+//                 this.$router.push('/products')
+//               }
+//             })
+//             .catch((error) => {
+//               if (error.response.status === 400) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Please correct your information'
+//                 })
+//               } else if (error.response.status === 403) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Forbidden'
+//                 })
+//                 this.$router.push('/')
+//                 cookies.remove('token')
+//               } else if (error.response.status === 401) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Unauthorized'
+//                 })
+//                 this.$router.push('/')
+//                 cookies.remove('token')
+//               }
+//             })
+//         } else {
+//           formData.append('ID', ID)
+//           formData.append('Name', this.Name)
+//           formData.append('UnitPrice', this.UnitPrice)
+//           formData.append('Type', this.Type)
+//           formData.append('Amount', this.Amount)
+//           formData.append('Category', this.Category)
+//           formData.append('attach_file', '')
+//           await this.$axios
+//             .post('http://localhost:8000/api/products/CreateProduct', formData, config)
+//             .then((response) => {
+//               if (response.status === 201) {
+//                 Swal.fire({
+//                   icon: 'success',
+//                   title: 'Success',
+//                   text: 'Ticket created successfully',
+//                   confirmButtonText: 'Ok'
+//                 })
+//                 this.$router.push('/tickets')
+//               }
+//             })
+//             .catch((error) => {
+//               if (error.response.status === 400) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Please correct your information'
+//                 })
+//               } else if (error.response.status === 403) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Forbidden'
+//                 })
+//                 this.$router.push('/')
+//                 cookies.remove('token')
+//               } else if (error.response.status === 401) {
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: 'Unauthorized'
+//                 })
+//                 this.$router.push('/')
+//                 cookies.remove('token')
+//               }
+//             })
+//         }
+//       }
+//     }
+//   }  
 export default {
   data () {
     return {
@@ -64,27 +188,26 @@ export default {
       UnitPrice: '',
       Type: '',
       Amount: '',
-      Category: '',
+      Category: ''
     }
   },
   methods: {
-    async createProduct () {
+    async create_product () {
       await this.$axios
-        .post('http://localhost:8000/api/auth/register', {
+        .post('http://localhost:8000//api/products/CreateProduct', {
           ID: this.ID,
           Name: this.Name,
           UnitPrice: this.UnitPrice,
           Type: this.Type,
           Amount: this.Amount,
           Category: this.Category,
-
         })
         .then(function (response) {
           if (response.status === 201) {
             Swal.fire({
               icon: 'success',
               title: 'Success',
-              text: 'You have successfully added product ',
+              text: 'You have successfully registered',
               confirmButtonText: 'OK'
             }).then((result) => {
               if (result.value) {
@@ -100,18 +223,16 @@ export default {
               title: 'Oops...',
               text: 'Please correct your information'
             })
+          } else if (error.response.status === 201) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Create completed',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
         })
     }
-  }
-}
-
-function handleFileChange(event) {
-  const file = event.target.files[0];
-  if (file) {
-    alert('คุณได้เลือกไฟล์: ' + file.name);
-    // คุณสามารถเพิ่มฟังก์ชันการทำงานที่ต้องการได้ที่นี่
-    // เช่น แสดงภาพที่เลือก, อัพโหลดไฟล์ไปยังเซิร์ฟเวอร์, เป็นต้น
   }
 }
 </script>
