@@ -122,7 +122,7 @@ export default defineComponent({
           Category: this.Category,
         };
         const response = await axios.post(
-          "http://localhost:8000/users",
+          "http://localhost:8000/api/products/CreateProduct",
           payload
         );
         console.log(response.data);
