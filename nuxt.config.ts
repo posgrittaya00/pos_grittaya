@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss','nuxt-primevue'],
+
+  runtimeConfig: {
+    public: {
+      API: ''
+    }
+  },
   typescript: {strict: false},
   css: [
     'primeicons/primeicons.css',

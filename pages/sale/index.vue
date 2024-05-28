@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from 'vue-router';
 import salecreate from './partial/salecreate.vue';
@@ -11,6 +11,8 @@ const goTosalecreate = () => {
   addsearch.value = !addsearch.value;
   OpenSaleCreate.value = !OpenSaleCreate.value;
 };
+
+const {$axios} = useNuxtApp()
 
 definePageMeta({
   layout: 'default'
@@ -27,6 +29,26 @@ const category = ref([
     { name: 'ของใช้ทั่วไป', code: 'IT' }, //อย่าลืมแก้
     { name: 'อาหารแห้ง', code: 'DF' }
 ]);
+
+const getData = async() => {
+  await $axios.get('/api/auth/login').then((resp: any) => {
+
+    const {data} = resp
+
+    const token = useCookie('token')
+    token.value = data.token
+
+    // router.push('/')
+    // console.log(data);
+  }).catch((err: any) => {
+    console.log(err);
+  })
+}
+
+onMounted(() => {
+  getData();
+})
+
 </script>
 
 
