@@ -52,7 +52,9 @@ const getData = async () => {
 onMounted(() => {
   getData();
 });
+//uhjw
 </script>
+
 
 <template>
   <div class="flex gap-2 mt-2 mr-2">
