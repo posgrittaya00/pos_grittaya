@@ -80,29 +80,34 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axios from "axios";
+import { useNuxtApp, useCookie } from '#imports';
+
+const { $axios }: any = useNuxtApp();
 
 interface Login {
   username: string;
-  password: string
+  password: string;
 }
-
 
 const login = ref<Login>({
   username: "",
   password: "",
-})
+});
 const router = useRouter();
 
 const submitLogin = async () => {
   try {
-    const response = await axios.post("http://localhost:8080/login", login.value);
+    const response = await $axios.post("/api/auth/login", login.value);
     const { data } = response;
-    if (data.status === 200) {
+
+    if (data.status === 'success') {
       const token = useCookie("token");
       token.value = data.token;
       alert("Login successful!");
       router.push("/dashboard");
+    }
+    else {
+      alert(data.message || "Login failed. Please try again.");
     }
   } catch (error) {
     alert("Invalid username or password");
@@ -114,6 +119,4 @@ definePageMeta({
 });
 </script>
 
-<style>
-
-</style>
+<style></style>
