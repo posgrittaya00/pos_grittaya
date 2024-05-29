@@ -12,15 +12,6 @@
       <div class="flex justify-between gap-2 flex-grow">
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-1 mt-1">
-            <label for="ID">รหัสสินค้า</label>
-            <InputText
-              type="text"
-              id="ID"
-              v-model="ID"
-              class="w-[200px] h-[40px]"
-            />
-          </div>
-          <div class="flex flex-col gap-1 mt-1">
             <label for="Name">ชื่อสินค้า</label>
             <InputText id="Name" v-model="Name" class="w-[200px] h-[40px]" />
           </div>
@@ -90,18 +81,14 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import axios from "axios";
 
-
 export default defineComponent({
-  components: {
-  },
+  components: {},
   data() {
     return {
-      ID: ref(""),
       Name: ref(""),
       Price: ref(),
       Type: ref(""),
@@ -124,6 +111,7 @@ export default defineComponent({
           payload
         );
         console.log(response.data);
+        this.$emit("product-created", response.data); // Emit event with the created product data
       } catch (error) {
         console.error("There was an error creating the product:", error);
       }
