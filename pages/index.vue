@@ -27,7 +27,7 @@
             <input
               id="username"
               name="username"
-              v-model="username"
+              v-model="login.username"
               type="text"
               autocomplete="username"
               required
@@ -48,7 +48,7 @@
             <input
               id="password"
               name="password"
-              v-model="password"
+              v-model="login.password"
               type="password"
               autocomplete="current-password"
               required
@@ -82,18 +82,25 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
-const username = ref("");
-const password = ref("");
+interface Login {
+  username: string;
+  password: string
+}
+
+
+const login = ref<Login>({
+  username: "",
+  password: "",
+})
 const router = useRouter();
 
 const submitLogin = async () => {
   try {
-    const response = await axios.post("http://localhost:8080/login", {
-      username: username.value,
-      password: password.value,
-    });
-
-    if (response.status === 200) {
+    const response = await axios.post("http://localhost:8080/login", login.value);
+    const { data } = response;
+    if (data.status === 200) {
+      const token = useCookie("token");
+      token.value = data.token;
       alert("Login successful!");
       router.push("/dashboard");
     }
