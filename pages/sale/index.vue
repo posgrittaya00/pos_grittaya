@@ -1,57 +1,3 @@
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import salecreate from "./partial/salecreate.vue";
-import { useNuxtApp } from "#app";
-
-const router = useRouter();
-const OpenSaleCreate = ref(true);
-const addproduct = ref(false);
-const addsearch = ref(false);
-
-const goTosalecreate = () => {
-  addproduct.value = !addproduct.value;
-  addsearch.value = !addsearch.value;
-  OpenSaleCreate.value = !OpenSaleCreate.value;
-};
-
-const searchProduct = ref<string>("");
-
-const { $axios } = useNuxtApp();
-
-definePageMeta({
-  layout: "default",
-});
-
-const selectedStatus = ref<string | undefined>();
-const status = ref([
-  { name: "พร้อมขาย", code: "Y" },
-  { name: "ไม่พร้อมขาย", code: "N" },
-]);
-
-const selectedCategory = ref<string | undefined>();
-const category = ref([
-  { name: "ของใช้ทั่วไป", code: "IT" },
-  { name: "อาหารแห้ง", code: "DF" },
-]);
-
-const getData = async () => {
-  try {
-    const resp = await $axios.get("/api/auth/login");
-    const { data } = resp;
-
-    const token = useCookie("token");
-    token.value = data.token;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-onMounted(() => {
-  getData();
-});
-</script>
-
 <template>
   <div class="flex gap-2 mt-2 mr-2">
     <div
@@ -59,7 +5,7 @@ onMounted(() => {
       class="flex flex-col gap-4 w-full h-[250px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative"
     >
       <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
-        <div class="px-3">
+        <div class="px-3 w-full">
           <div class="flex justify-between gap-5 items-center">
             <span>
               <Dropdown
@@ -99,14 +45,15 @@ onMounted(() => {
                   v-model="searchProduct"
                   type="search"
                   id="default-search"
-                  class="block w-[210px] h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="block w-[500px] h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="ค้นหาสินค้า"
                   required
+                  :class="addsearch == false ? 'w-[230px]' : 'w-full'"
                 />
               </div>
             </form>
 
-            <span class="buttoncreate">
+            <span class="ml-auto buttoncreate">
               <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" />
             </span>
           </div>
@@ -152,6 +99,70 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import salecreate from "./partial/salecreate.vue";
+import { useNuxtApp } from "#app";
+
+const router = useRouter();
+const OpenSaleCreate = ref(true);
+const addproduct = ref(false);
+const addsearch = ref(false);
+const products = ref([]);
+
+const goTosalecreate = () => {
+  addproduct.value = !addproduct.value;
+  addsearch.value = !addsearch.value;
+  OpenSaleCreate.value = !OpenSaleCreate.value;
+};
+
+const searchProduct = ref<string>("");
+
+const { $axios } = useNuxtApp();
+
+definePageMeta({
+  layout: "default",
+});
+
+const selectedStatus = ref<string | undefined>();
+const status = ref([
+  { name: "พร้อมขาย", code: "Y" },
+  { name: "ไม่พร้อมขาย", code: "N" },
+]);
+
+const selectedCategory = ref<string | undefined>();
+const category = ref([
+  { name: "ของใช้ทั่วไป", code: "IT" },
+  { name: "อาหารแห้ง", code: "DF" },
+]);
+
+const getData = async () => {
+  try {
+    const resp = await $axios.get("http://10.5.41.86:8000/api/products/GetProduct");
+    const { data } = resp;
+
+    const token = useCookie("token");
+    token.value = data.token;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(() => {
+  getData();
+});
+
+onMounted(async () => {
+  try {
+    const response = await $axios.get("http://10.5.41.86:8000/api/products/GetProduct"); // เรียก API เพื่อดึงข้อมูลสินค้า
+    products.value = response.data; // กำหนดข้อมูลที่ดึงมาให้กับตัวแปร products
+  } catch (error) {
+    console.error("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", error);
+  }
+});
+</script>
 
 <style>
 .placeholder-shift::placeholder {

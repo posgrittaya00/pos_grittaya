@@ -12,94 +12,82 @@
         </div>
     </div>
     <!-- กล่องที่ 2 -->
-    <div class="flex">
-        
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-b-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <!-- <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th> -->
-                <th scope="col" class="px-6 py-3">
-                    Product name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Color
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Category
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Accessories
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Available
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Weight
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <!-- <td class="w-4 p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                    </div>
-                </td> -->
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    Yes
-                </td>
-                <td class="px-6 py-4">
-                    Yes
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    3.0 lb.
-                </td>
-                <td class="flex items-center px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+    <div class="flex w-full">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            รหัสสินค้า
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            ชื่อสินค้า
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            ราคา
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            จำนวน
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            หน่วย
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            หมวดหมู่
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            12345
+                        </th>
+                        <td class="px-6 py-4">
+                            มาม่า
+                        </td>
+                        <td class="px-6 py-4">
+                            7
+                        </td>
+                        <td class="px-6 py-4">
+                            10
+                        </td>
+                        <td class="px-6 py-4">
+                            ซอง
+                        </td>
+                        <td class="px-6 py-4">
+                            อาหารแห้ง
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แก้ไขสต็อก</a>
+                        </td>
+                        <td class="flex items-center px-6 py-4">
+                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
 <script setup>
-const selectedCategory = ref();
+import { ref } from 'vue';
+
+const selectedCategory = ref(null);
 const category = ref([
-    { name: 'คลังสินค้าที่ขาย', code: 'SA' }, //อย่าลืมแก้
+    { name: 'คลังสินค้าที่ขาย', code: 'SA' },
     { name: 'คลังสินค้าที่สต็อก', code: 'ST' }
 ]);
 </script>
 
 <style lang="scss" scoped>
-
+.flex {
+    width: 100%;
+}
 </style>
