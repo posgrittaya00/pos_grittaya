@@ -26,12 +26,23 @@
               />
             </span>
             <form class="max-w-md mx-auto">
-              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+              <label
+                for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >
                 Search
               </label>
               <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <div
+                  class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                >
+                  <svg
+                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       stroke="currentColor"
                       stroke-linecap="round"
@@ -54,15 +65,25 @@
             </form>
 
             <span class="ml-auto buttoncreate">
-              <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" />
+              <Button
+                icon="pi pi-plus"
+                class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
+                @click="goTosalecreate"
+              />
             </span>
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2">
+      <div
+        class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2"
+      >
         <div class="relative overflow-x-auto">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
               <tr>
                 <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
                 <th scope="col" class="px-6 py-3">ชื่อสินค้า</th>
@@ -74,14 +95,33 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="product in products" :key="product.product_id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <tr
+                v-for="product in products"
+                :key="product.product_id"
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
                 <td class="px-6 py-4">{{ product.product_id }}</td>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
                 <td class="px-6 py-4">{{ product.product_amount }}</td>
                 <td class="px-6 py-4">{{ product.product_type }}</td>
                 <td class="px-6 py-4">{{ product.product_category }}</td>
-                <td class="px-6 py-4">{{ product.status }}</td>
+                <td class="px-6 py-4">
+                  <label class="inline-flex items-center mb-5 cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer" />
+                    <div
+                      class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                    ></div>
+                    <span
+                      class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >ไม่พร้อมขาย</span
+                    >
+                    <td class="flex items-center px-6 py-4">
+                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
+                        </td>
+                  </label>
+                  
+                </td>
               </tr>
             </tbody>
           </table>
@@ -96,7 +136,10 @@
         { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
       ]"
     >
-      <salecreate :open="OpenSaleCreate" @product-created="handleProductCreated" />
+      <salecreate
+        :open="OpenSaleCreate"
+        @product-created="handleProductCreated"
+      />
     </div>
   </div>
 </template>
@@ -141,9 +184,11 @@ const category = ref([
 
 const getData = async () => {
   try {
-    const resp = await $axios.get("http://10.5.41.86:8000/api/products/GetAllProduct");
+    const resp = await $axios.get(
+      "http://10.5.41.86:8000/api/products/GetAllProduct"
+    );
     console.log("API response:", resp.data); // Debugging line
-    products.value = resp.data.data.products;  // Ensure correct path to products
+    products.value = resp.data.data.products; // Ensure correct path to products
     console.log("Products array:", products.value); // Debugging line
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
@@ -158,11 +203,11 @@ const handleProductCreated = async (response) => {
     addproduct.value = false;
     addsearch.value = false;
     OpenSaleCreate.value = true;
-    
+
     // Fetch updated data
     await getData();
   } else {
-    console.warn('Received invalid product data.');
+    console.warn("Received invalid product data.");
   }
 };
 
@@ -170,7 +215,6 @@ onMounted(() => {
   getData();
 });
 </script>
-
 
 <style>
 .placeholder-shift::placeholder {
