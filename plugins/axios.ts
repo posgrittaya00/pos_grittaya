@@ -6,8 +6,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     api.defaults.headers.common['Content-Type'] = 'application/json'
     api.defaults.baseURL = config.public.API
-
-    console.log(config.public.API);
     api.interceptors.request.use(async function (config) {
         // Do something before request is sent
 

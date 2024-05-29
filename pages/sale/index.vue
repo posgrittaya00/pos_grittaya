@@ -74,13 +74,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">Silver</td>
-                <td class="px-6 py-4">Laptop</td>
-                <td class="px-6 py-4">$2999</td>
+              <tr v-for="product in products" :key="product.product_id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">{{ product.product_id }}</td>
+                <td class="px-6 py-4">{{ product.product_name }}</td>
+                <td class="px-6 py-4">{{ product.product_Price }}</td>
+                <td class="px-6 py-4">{{ product.product_amount }}</td>
+                <td class="px-6 py-4">{{ product.product_type }}</td>
+                <td class="px-6 py-4">{{ product.product_category }}</td>
+                <td class="px-6 py-4">{{ product.status }}</td>
               </tr>
             </tbody>
           </table>
@@ -95,7 +96,7 @@
         { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
       ]"
     >
-      <salecreate :open="OpenSaleCreate" />
+      <salecreate :open="OpenSaleCreate" @product-created="handleProductCreated" />
     </div>
   </div>
 </template>
@@ -110,6 +111,7 @@ const router = useRouter();
 const OpenSaleCreate = ref(true);
 const addproduct = ref(false);
 const addsearch = ref(false);
+const products = ref([]);
 
 const goTosalecreate = () => {
   addproduct.value = !addproduct.value;
@@ -139,13 +141,28 @@ const category = ref([
 
 const getData = async () => {
   try {
-    const resp = await $axios.get("/api/auth/login");
-    const { data } = resp;
-
-    const token = useCookie("token");
-    token.value = data.token;
+    const resp = await $axios.get("http://10.5.41.86:8000/api/products/GetAllProduct");
+    console.log("API response:", resp.data); // Debugging line
+    products.value = resp.data.data.products;  // Ensure correct path to products
+    console.log("Products array:", products.value); // Debugging line
   } catch (err) {
-    console.log(err);
+    console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
+  }
+};
+
+const handleProductCreated = async (response) => {
+  console.log("Response received:", response); // Log the response object
+  const newProduct = response.data;
+  if (newProduct) {
+    products.value.push(newProduct);
+    addproduct.value = false;
+    addsearch.value = false;
+    OpenSaleCreate.value = true;
+    
+    // Fetch updated data
+    await getData();
+  } else {
+    console.warn('Received invalid product data.');
   }
 };
 
@@ -153,6 +170,7 @@ onMounted(() => {
   getData();
 });
 </script>
+
 
 <style>
 .placeholder-shift::placeholder {
