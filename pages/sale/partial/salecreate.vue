@@ -92,8 +92,7 @@
 </template>
 
 
-<script lang="ts"> 
-//asd
+<script lang="ts">
 import { defineComponent, ref } from "vue";
 import axios from "axios";
 
