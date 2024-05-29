@@ -1,3 +1,105 @@
+<template>
+  <div class="flex gap-2 mt-2 mr-2">
+    <div
+      :class="addproduct ? 'w-[700px]' : 'w-full'"
+      class="flex flex-col gap-4 w-full h-[250px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative"
+    >
+      <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
+        <div class="px-3 w-full">
+          <div class="flex justify-between gap-5 items-center">
+            <span>
+              <Dropdown
+                v-model="selectedStatus"
+                :options="status"
+                optionLabel="name"
+                placeholder="สถานะ"
+                class="w-full md:w-[8rem] h-[40px]"
+              />
+            </span>
+            <span>
+              <Dropdown
+                v-model="selectedCategory"
+                :options="category"
+                optionLabel="name"
+                placeholder="หมวดหมู่"
+                class="w-full md:w-[9rem] h-[40px]"
+              />
+            </span>
+            <form class="max-w-md mx-auto">
+              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+                Search
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  v-model="searchProduct"
+                  type="search"
+                  id="default-search"
+                  class="block w-[500px] h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="ค้นหาสินค้า"
+                  required
+                  :class="addsearch == false ? 'w-[230px]' : 'w-full'"
+                />
+              </div>
+            </form>
+
+            <span class="ml-auto buttoncreate">
+              <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2">
+        <div class="relative overflow-x-auto">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
+                <th scope="col" class="px-6 py-3">ชื่อสินค้า</th>
+                <th scope="col" class="px-6 py-3">ราคา</th>
+                <th scope="col" class="px-6 py-3">จำนวน</th>
+                <th scope="col" class="px-6 py-3">หน่วย</th>
+                <th scope="col" class="px-6 py-3">หมวดหมู่</th>
+                <th scope="col" class="px-6 py-3">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  Apple MacBook Pro 17"
+                </th>
+                <td class="px-6 py-4">Silver</td>
+                <td class="px-6 py-4">Laptop</td>
+                <td class="px-6 py-4">$2999</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="addproduct"
+      :class="[
+        'ease-in-out',
+        'duration-200',
+        { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
+      ]"
+    >
+      <salecreate :open="OpenSaleCreate" />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -61,107 +163,6 @@ onMounted(async () => {
   }
 });
 </script>
-
-<template>
-  <div class="flex gap-2 mt-2 mr-2">
-    <div
-      :class="addproduct ? 'w-[700px]' : 'w-full'"
-      class="flex flex-col gap-4 w-full h-[250px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative"
-    >
-      <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
-        <div class="px-3">
-          <div class="flex justify-between gap-5 items-center">
-            <span>
-              <Dropdown
-                v-model="selectedStatus"
-                :options="status"
-                optionLabel="name"
-                placeholder="สถานะ"
-                class="w-full md:w-[8rem] h-[40px]"
-              />
-            </span>
-            <span>
-              <Dropdown
-                v-model="selectedCategory"
-                :options="category"
-                optionLabel="name"
-                placeholder="หมวดหมู่"
-                class="w-full md:w-[9rem] h-[40px]"
-              />
-            </span>
-            <form class="max-w-md mx-auto">
-              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-                Search
-              </label>
-              <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  v-model="searchProduct"
-                  type="search"
-                  id="default-search"
-                  class="block w-[210px] h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="ค้นหาสินค้า"
-                  required
-                />
-              </div>
-            </form>
-
-            <span class="buttoncreate">
-              <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" />
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2">
-        <div class="relative overflow-x-auto">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
-                <th scope="col" class="px-6 py-3">ชื่อสินค้า</th>
-                <th scope="col" class="px-6 py-3">ราคา</th>
-                <th scope="col" class="px-6 py-3">จำนวน</th>
-                <th scope="col" class="px-6 py-3">หน่วย</th>
-                <th scope="col" class="px-6 py-3">หมวดหมู่</th>
-                <th scope="col" class="px-6 py-3">สถานะ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  
-                </th>
-                <td class="px-6 py-4"></td>
-                <td class="px-6 py-4"></td>
-                <td class="px-6 py-4"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div
-      v-if="addproduct"
-      :class="[
-        'ease-in-out',
-        'duration-200',
-        { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
-      ]"
-    >
-      <salecreate :open="OpenSaleCreate" />
-    </div>
-  </div>
-</template>
 
 <style>
 .placeholder-shift::placeholder {
