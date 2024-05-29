@@ -29,7 +29,7 @@
             <label for="UnitPrice">ราคา</label>
             <InputText
               id="UnitPrice"
-              v-model="UnitPrice"
+              v-model="Price"
               class="w-[200px] h-[40px]"
             />
           </div>
@@ -104,9 +104,9 @@ export default defineComponent({
     return {
       ID: ref(""),
       Name: ref(""),
-      UnitPrice: ref(""),
+      Price: ref(),
       Type: ref(""),
-      Amount: ref(""),
+      Amount: ref(),
       Category: ref(""),
     };
   },
@@ -114,15 +114,14 @@ export default defineComponent({
     async create_product() {
       try {
         const payload = {
-          ID: this.ID,
-          Name: this.Name,
-          UnitPrice: this.UnitPrice,
-          Type: this.Type,
-          Amount: this.Amount,
-          Category: this.Category,
+          product_name: this.Name,
+          product_Price: Number(this.Price),
+          product_type: this.Type,
+          product_amount: Number(this.Amount),
+          product_category: this.Category,
         };
         const response = await axios.post(
-          "http://localhost:8000/api/products/CreateProduct",
+          "http://10.5.41.86:8000/api/products/CreateProduct",
           payload
         );
         console.log(response.data);
