@@ -110,6 +110,7 @@ const router = useRouter();
 const OpenSaleCreate = ref(true);
 const addproduct = ref(false);
 const addsearch = ref(false);
+const products = ref([]);
 
 const goTosalecreate = () => {
   addproduct.value = !addproduct.value;
@@ -139,7 +140,7 @@ const category = ref([
 
 const getData = async () => {
   try {
-    const resp = await $axios.get("/api/auth/login");
+    const resp = await $axios.get("http://10.5.41.86:8000/api/products/GetProduct");
     const { data } = resp;
 
     const token = useCookie("token");
@@ -151,6 +152,15 @@ const getData = async () => {
 
 onMounted(() => {
   getData();
+});
+
+onMounted(async () => {
+  try {
+    const response = await $axios.get("http://10.5.41.86:8000/api/products/GetProduct"); // เรียก API เพื่อดึงข้อมูลสินค้า
+    products.value = response.data; // กำหนดข้อมูลที่ดึงมาให้กับตัวแปร products
+  } catch (error) {
+    console.error("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", error);
+  }
 });
 </script>
 
