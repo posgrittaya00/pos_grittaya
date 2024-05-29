@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-4 w-auto min-w-[200px] max-w-[550px] h-[700px] text-[16px] font-semibold rounded-lg bg-white p-4 relative mr-2 shadow-[3px_4px_4px_rgba(0,0,0,0.25)]"
+    class="flex flex-col gap-4 w-auto min-w-[200px] max-w-[550px] h-[585px] text-[16px] font-semibold rounded-lg bg-white p-4 relative mr-2 shadow-[3px_4px_4px_rgba(0,0,0,0.25)]"
   >
     <div class="card flex justify-center">
       <span
@@ -46,7 +46,7 @@
         </div>
         <div class="container">
           <div
-            class="bg-gray-300 w-[250px] h-[475px] rounded-md flex justify-center items-center"
+            class="bg-gray-300 w-[250px] h-[400px] rounded-md flex justify-center items-center"
           >
             <button
               class="flex items-center"
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="flex gap-3 mt-1">
+      <div class="flex gap-3 mt-9">
         <Button
           type="button"
           label="ยกเลิก"
