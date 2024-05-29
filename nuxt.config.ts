@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css',
     '@/assets/css/main.css',
   ],
-  primevue: {
+  primevue: {   
     options: {
       unstyled: true
     },
@@ -55,6 +55,10 @@ export default defineNuxtConfig({
     }
     }
   },
+  build: {
+    transpile: ['primevue']
+  },
+  plugins: ['~/plugins/primevue.ts']
 })
 
 
