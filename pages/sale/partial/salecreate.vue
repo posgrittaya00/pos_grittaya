@@ -13,7 +13,6 @@
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-1 mt-1">
             <label for="ID">รหัสสินค้า</label>
-            {{ Name }}
             <InputText
               type="text"
               id="ID"
@@ -144,5 +143,4 @@ export default defineComponent({
     },
   },
 });
-//maike
 </script>
