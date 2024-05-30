@@ -57,8 +57,7 @@
                   v-model="searchProduct"
                   type="search"
                   id="default-search"
-                  class="block w-full h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 
-                  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="block w-full h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="ค้นหาสินค้า"
                   required
                   :class="addsearch == false ? 'w-[230px]' : 'w-full'"
@@ -121,14 +120,14 @@
                       class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >ไม่พร้อมขาย</span
                     >
-                    <td class="flex items-center px-6 py-4">
-                      <a
-                        href="#"
-                        class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
-                        >ลบสินค้า</a
-                      >
-                    </td>
                   </label>
+                </td>
+                <td class="flex items-center px-6 py-4">
+                  <a
+                    href="#"
+                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
+                    >ลบสินค้า</a
+                  >
                 </td>
               </tr>
             </tbody>
