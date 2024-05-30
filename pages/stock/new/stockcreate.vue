@@ -70,7 +70,7 @@ export default {
   methods: {
     async createProduct () {
       await this.$axios
-        .post('http://localhost:8000/api/auth/register', {
+        .post('http://10.5.41.89:8000/api/auth/register', {
           ID: this.ID,
           Name: this.Name,
           UnitPrice: this.UnitPrice,

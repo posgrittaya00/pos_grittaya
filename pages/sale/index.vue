@@ -13,7 +13,8 @@
                 :options="status"
                 optionLabel="name"
                 placeholder="สถานะ"
-                class="w-[170px] h-[40px]"
+                class="w-full md:w-[8rem] h-[40px]"
+                @change="filterProducts"
               />
             </span>
             <span>
@@ -22,11 +23,14 @@
                 :options="category"
                 optionLabel="name"
                 placeholder="หมวดหมู่"
-                class="w-[170px] h-[40px]"
+                class="w-full md:w-[9rem] h-[40px]"
               />
             </span>
-            <form class="w-full ">
-              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+            <form class="w-full" @submit.prevent="filterProducts">
+              <label
+                for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >
                 Search
               </label>
               <div class="relative">
@@ -57,6 +61,7 @@
                   placeholder="ค้นหาสินค้า"
                   required
                   :class="addsearch == false ? 'w-[230px]' : 'w-full'"
+                  @input="filterProducts"
                 />
               </div>
             </form>
@@ -69,7 +74,7 @@
       >
         <div class="relative overflow-x-auto">
           <table
-            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            class="w-full text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400"
           >
             <thead
               class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -86,7 +91,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="product in products"
+                v-for="product in filteredProducts"
                 :key="product.product_id"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
@@ -103,14 +108,17 @@
                       class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
                     ></div>
                     <span
-                      class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="ms-3 text-lg font-medium text-gray-900 dark:text-gray-300"
                       >ไม่พร้อมขาย</span
                     >
                     <td class="flex items-center px-6 py-4">
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
-                        </td>
+                      <a
+                        href="#"
+                        class="font-medium text-lg text-red-600 dark:text-red-500 hover:underline ms-3"
+                        >ลบสินค้า</a
+                      >
+                    </td>
                   </label>
-                  
                 </td>
               </tr>
             </tbody>
@@ -119,23 +127,23 @@
       </div>
     </div>
     <div
-      v-if="addproduct"
-      :class="[
-        'ease-in-out',
-        'duration-200',
-        { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
-      ]"
-    >
-      <salecreate
-        :open="OpenSaleCreate"
-        @product-created="handleProductCreated"
-      />
+        v-if="addproduct"
+        :class="[
+          'ease-in-out',
+          'duration-200',
+          { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
+        ]"
+      >
+        <salecreate
+          :open="OpenSaleCreate"
+          @product-created="handleProductCreated"
+        />
+      </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import salecreate from "./partial/salecreate.vue";
 import { useNuxtApp } from "#app";
@@ -175,7 +183,7 @@ const category = ref([
 const getData = async () => {
   try {
     const resp = await $axios.get(
-      "http://10.5.41.86:8000/api/products/GetAllProduct"
+      "http://10.5.41.89:8000/api/products/GetAllProduct"
     );
     console.log("API response:", resp.data); // Debugging line
     products.value = resp.data.data.products; // Ensure correct path to products
@@ -201,6 +209,26 @@ const handleProductCreated = async (response) => {
   }
 };
 
+const filteredProducts = computed(() => {
+  let filtered = products.value;
+  if (searchProduct.value) {
+    filtered = filtered.filter((product) =>
+      product.product_name.toLowerCase().includes(searchProduct.value.toLowerCase())
+    );
+  }
+  if (selectedCategory.value) {
+    filtered = filtered.filter((product) => product.product_category === selectedCategory.value);
+  }
+  if (selectedStatus.value) {
+    filtered = filtered.filter((product) => product.product_status === selectedStatus.value);
+  }
+  return filtered;
+});
+
+const filterProducts = () => {
+  // This function is intentionally left blank as the filtering is done automatically by the computed property
+};
+
 onMounted(() => {
   getData();
 });
@@ -224,3 +252,4 @@ onMounted(() => {
   color: #999;
 }
 </style>
+

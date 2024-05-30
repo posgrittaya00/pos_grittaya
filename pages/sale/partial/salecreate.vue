@@ -82,6 +82,7 @@
 </template>
 
 <script lang="ts">
+//sds
 import { defineComponent, ref } from "vue";
 import axios from "axios";
 
@@ -107,7 +108,7 @@ export default defineComponent({
           product_category: this.Category,
         };
         const response = await axios.post(
-          "http://10.5.41.86:8000/api/products/CreateProduct",
+          "http://10.5.41.89:8000/api/products/CreateProduct",
           payload
         );
         console.log(response.data);
