@@ -37,7 +37,7 @@
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
       >
         <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
         >
           <tr>
             <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
@@ -52,19 +52,21 @@
         </thead>
         <tbody>
           <tr
+            v-for="product in filteredProducts"
+            :key="product.product_id"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <th
               scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm"
             >
-              12345
+              {{ product.product_id }}
             </th>
-            <td class="px-6 py-4">มาม่า</td>
-            <td class="px-6 py-4">7</td>
-            <td class="px-6 py-4">10</td>
-            <td class="px-6 py-4">ซอง</td>
-            <td class="px-6 py-4">อาหารแห้ง</td>
+            <td class="px-6 py-4">{{ product.product_name }}</td>
+            <td class="px-6 py-4">{{ product.product_Price }}</td>
+            <td class="px-6 py-4">{{ product.product_amount }}</td>
+            <td class="px-6 py-4">{{ product.product_type }}</td>
+            <td class="px-6 py-4">{{ product.product_category }}</td>
             <td class="px-6 py-4">
               <a
                 href="#"
@@ -86,14 +88,49 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref, onMounted, computed } from "vue";
+import { useNuxtApp } from "#app";
 
-const selectedCategory = ref(null);
+const selectedCategory = ref<string | undefined>();
 const category = ref([
   { name: "คลังสินค้าที่ขาย", code: "SA" },
   { name: "คลังสินค้าที่สต็อก", code: "ST" },
 ]);
+
+const searchProduct = ref<string>("");
+const products = ref([]);
+const addsearch = ref(false); // Added declaration of addsearch
+
+const { $axios } = useNuxtApp();
+
+const getData = async () => {
+  try {
+    const resp = await $axios.get("http://10.5.41.89:8000/api/products/GetAllProduct");
+    console.log("API response:", resp.data); // Debugging line
+    products.value = resp.data.data.products; // Ensure correct path to products
+    console.log("Products array:", products.value); // Debugging line
+  } catch (err) {
+    console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
+  }
+};
+
+const filteredProducts = computed(() => {
+  let filtered = products.value;
+  if (searchProduct.value) {
+    filtered = filtered.filter(product =>
+      product.product_name.toLowerCase().includes(searchProduct.value.toLowerCase())
+    );
+  }
+  if (selectedCategory.value) {
+    filtered = filtered.filter(product => product.product_category === selectedCategory.value);
+  }
+  return filtered;
+});
+
+onMounted(() => {
+  getData();
+});
 </script>
 
 <style lang="scss" scoped>
