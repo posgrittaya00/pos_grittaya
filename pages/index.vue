@@ -80,10 +80,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useNuxtApp, useCookie } from '#imports';
-
+import { useNuxtApp, useCookie } from "#imports";
+import { useIndexStore } from "~/store/main";
 const { $axios }: any = useNuxtApp();
 
+const store = useIndexStore();
 interface Login {
   username: string;
   password: string;
@@ -99,14 +100,14 @@ const submitLogin = async () => {
   try {
     const response = await $axios.post("/api/auth/login", login.value);
     const { data } = response;
-
-    if (data.status === 'success') {
+    store.$state.username = data.Nickname;
+    console.log(store.$state.username);
+    if (data.status === "success") {
       const token = useCookie("token");
       token.value = data.token;
       alert("Login successful!");
       router.push("/dashboard");
-    }
-    else {
+    } else {
       alert(data.message || "Login failed. Please try again.");
     }
   } catch (error) {
