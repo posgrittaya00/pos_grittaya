@@ -13,7 +13,7 @@
                 :options="status"
                 optionLabel="name"
                 placeholder="สถานะ"
-                class="w-full md:w-[8rem] h-[40px]"
+                class="w-[170px] h-[40px]"
                 @change="filterProducts"
               />
             </span>
@@ -23,7 +23,7 @@
                 :options="category"
                 optionLabel="name"
                 placeholder="หมวดหมู่"
-                class="w-full md:w-[9rem] h-[40px]"
+                class="w-[170px] h-[40px]"
               />
             </span>
             <form class="w-full" @submit.prevent="filterProducts">
