@@ -143,15 +143,14 @@
                         product.Status == 0 ? "ไม่พร้อมขาย" : "พร้อมขาย"
                       }}</span
                     >
+                    <td class="flex items-center px-6 py-4">
+                      <a
+                        href="#"
+                        class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
+                        >ลบสินค้า</a
+                      >
+                    </td>
                   </label>
-                </td>
-                <td class="flex items-center px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ml-3"
-                    @click="removeProduct(product.product_id)"
-                    >ลบสินค้า</a
-                  >
                 </td>
               </tr>
             </tbody>

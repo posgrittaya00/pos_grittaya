@@ -73,6 +73,7 @@
                   placeholder="ค้นหาสินค้า"
                   @input="filterCategory('search')"
                   required
+                  :class="addsearch == false ? 'w-[230px]' : 'w-full'"
                 />
               </div>
             </form>
@@ -108,14 +109,9 @@
               <tr
                 v-for="product in filteredProducts"
                 :key="product.product_id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                class="text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {{ textcut(product.product_id) }}
-                </th>
+                <td class="px-6 py-4">{{ product.product_id }}</td>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
                 <td class="px-6 py-4">{{ product.product_amount }}</td>
@@ -132,14 +128,7 @@
                       >พร้อมขาย</span
                     >
                   </label>
-                </td>
-                <td class="flex items-center px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ml-3"
-                    @click="removeProduct(product.product_id)"
-                    >ลบสินค้า</a
-                  >
+                  
                 </td>
               </tr>
             </tbody>
@@ -197,8 +186,7 @@ const status = ref([
   { name: "ไม่พร้อมขาย", code: "N" },
 ]);
 const category = ref([
-  { name: "ทั้งหมด", code: "ALL" },
-  { name: "ของใช้ทั่วไป", code: "IT" },
+{ name: "ของใช้ทั่วไป", code: "IT" },
   { name: "อาหารแห้ง", code: "DF" },
   { name: "บรรจุภัณฑ์", code: "PG" },
   { name: "เครื่องดื่ม", code: "DR" },
@@ -233,50 +221,6 @@ const handleProductCreated = async (response) => {
     await getData();
   } else {
     console.warn("Received invalid product data.");
-  }
-};
-
-const filteredProducts = computed(() => {
-  let filtered = products.value;
-  if (searchProduct.value) {
-    filtered = filtered.filter((product) =>
-      product.product_name
-        .toLowerCase()
-        .includes(searchProduct.value.toLowerCase())
-    );
-  }
-  if (categoryValue.value && categoryValue.value !== "ทั้งหมด") {
-    filtered = filtered.filter(
-      (product) => product.product_category === categoryValue.value
-    );
-  }
-  if (statusValue.value && statusValue.value !== "พร้อมขาย") {
-    filtered = filtered.filter(
-      (product) => product.product_status === statusValue.value
-    );
-  }
-  return filtered;
-});
-
-const textcut = (string: string) => {
-  if (string.length > 5) {
-    string = string.substring(0, 4) + "...";
-  }
-  return string;
-};
-
-const filterCategory = (type: string) => {
-  // This function is intentionally left blank as the filtering is done automatically by the computed property
-};
-
-const removeProduct = async (productId) => {
-  try {
-    await $axios.delete(`http://10.5.41.89:8000/api/products/${productId}`);
-    products.value = products.value.filter(
-      (product) => product.product_id !== productId
-    );
-  } catch (err) {
-    console.error("Error removing product:", err);
   }
 };
 
