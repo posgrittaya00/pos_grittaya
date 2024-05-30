@@ -13,7 +13,7 @@
                 :options="status"
                 optionLabel="name"
                 placeholder="สถานะ"
-                class="w-full md:w-[8rem] h-[40px]"
+                class="w-[170px] h-[40px]"
               />
             </span>
             <span>
@@ -22,7 +22,7 @@
                 :options="category"
                 optionLabel="name"
                 placeholder="หมวดหมู่"
-                class="w-full md:w-[9rem] h-[40px]"
+                class="w-[170px] h-[40px]"
               />
             </span>
             <form class="w-full ">
@@ -60,14 +60,7 @@
                 />
               </div>
             </form>
-
-            <span class="ml-auto buttoncreate">
-              <Button
-                icon="pi pi-plus"
-                class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
-                @click="goTosalecreate"
-              />
-            </span>
+            <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" rounded />
           </div>
         </div>
       </div>
