@@ -2,36 +2,52 @@
   <div class="flex gap-2 mt-2 mr-2">
     <div
       :class="addproduct ? 'w-[700px]' : 'w-full'"
-      class="flex flex-col gap-4 w-full h-[250px] text-[16px] font-semibold rounded-lg rounded-tr-lg bg-[white] relative"
+      class="flex flex-col gap-4 w-full text-[16px] font-semibold rounded-lg bg-white relative"
     >
-      <div class="flex shadow-[0px_4px_4px_rgb(0,0,0,0.25)] py-4 rounded-b-md">
+      <div class="flex shadow py-4 rounded-b-md">
         <div class="px-3 w-full">
           <div class="flex justify-between gap-5 items-center">
-            <span>
-              <Dropdown
-                v-model="selectedStatus"
-                :options="status"
-                optionLabel="name"
-                placeholder="สถานะ"
-                class="w-full md:w-[8rem] h-[40px]"
-              />
-            </span>
-            <span>
-              <Dropdown
-                v-model="selectedCategory"
-                :options="category"
-                optionLabel="name"
-                placeholder="หมวดหมู่"
-                class="w-full md:w-[9rem] h-[40px]"
-              />
-            </span>
-            <form class="w-full ">
-              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+            <div>
+              <select
+                @change="filterCategory('status')"
+                v-model="statusValue"
+                class="w-[150px] h-[40px] bg-gray-200 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              >
+                <option value="" selected>พร้อมขาย</option>
+                <option
+                  v-for="(item, index) in status"
+                  :key="index"
+                  :value="item.name"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <select
+                @change="filterCategory('category')"
+                v-model="categoryValue"
+                class="w-[150px] bg-gray-200 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              >
+                <option
+                  v-for="(item, index) in category"
+                  :key="index"
+                  :value="item.name"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <form class="w-full">
+              <label
+                for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >
                 Search
               </label>
               <div class="relative">
                 <div
-                  class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg
                     class="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -53,33 +69,29 @@
                   v-model="searchProduct"
                   type="search"
                   id="default-search"
-                  class="block w-full h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="block w-full h-[40px] pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="ค้นหาสินค้า"
+                  @input="filterCategory('search')"
                   required
-                  :class="addsearch == false ? 'w-[230px]' : 'w-full'"
                 />
               </div>
             </form>
-
-            <span class="ml-auto buttoncreate">
-              <Button
-                icon="pi pi-plus"
-                class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
-                @click="goTosalecreate"
-              />
-            </span>
+            <Button
+              icon="pi pi-plus"
+              class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
+              @click="goTosalecreate"
+              rounded
+            />
           </div>
         </div>
       </div>
-      <div
-        class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2"
-      >
-        <div class="relative overflow-x-auto">
+      <div class="flex w-full">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full">
           <table
-            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
           >
             <thead
-              class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              class="text-l text-gray-700 uppercase bg-gray-50 dark:text-gray-400"
             >
               <tr>
                 <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
@@ -88,16 +100,22 @@
                 <th scope="col" class="px-6 py-3">จำนวน</th>
                 <th scope="col" class="px-6 py-3">หน่วย</th>
                 <th scope="col" class="px-6 py-3">หมวดหมู่</th>
-                <th scope="col" class="px-6 py-3">สถานะ</th>
+                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="product in products"
+                v-for="product in filteredProducts"
                 :key="product.product_id"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
-                <td class="px-6 py-4">{{ product.product_id }}</td>
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {{ textcut(product.product_id) }}
+                </th>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
                 <td class="px-6 py-4">{{ product.product_amount }}</td>
@@ -107,17 +125,21 @@
                   <label class="inline-flex items-center mb-5 cursor-pointer">
                     <input type="checkbox" value="" class="sr-only peer" />
                     <div
-                      class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                      class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
                     ></div>
                     <span
-                      class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
-                      >ไม่พร้อมขาย</span
+                      class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >พร้อมขาย</span
                     >
-                    <td class="flex items-center px-6 py-4">
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
-                        </td>
                   </label>
-                  
+                </td>
+                <td class="flex items-center px-6 py-4">
+                  <a
+                    href="#"
+                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ml-3"
+                    @click="removeProduct(product.product_id)"
+                    >ลบสินค้า</a
+                  >
                 </td>
               </tr>
             </tbody>
@@ -142,7 +164,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import salecreate from "./new/stockcreate.vue";
 import { useNuxtApp } from "#app";
@@ -152,6 +174,7 @@ const OpenSaleCreate = ref(true);
 const addproduct = ref(false);
 const addsearch = ref(false);
 const products = ref([]);
+const products_default = ref([]);
 
 const goTosalecreate = () => {
   addproduct.value = !addproduct.value;
@@ -160,6 +183,8 @@ const goTosalecreate = () => {
 };
 
 const searchProduct = ref<string>("");
+const categoryValue = ref<string>("ทั้งหมด");
+const statusValue = ref<string>("พร้อมขาย");
 
 const { $axios } = useNuxtApp();
 
@@ -167,20 +192,18 @@ definePageMeta({
   layout: "default",
 });
 
-const selectedStatus = ref<string | undefined>();
 const status = ref([
   { name: "พร้อมขาย", code: "Y" },
   { name: "ไม่พร้อมขาย", code: "N" },
 ]);
-
-const selectedCategory = ref<string | undefined>();
 const category = ref([
-{ name: "ของใช้ทั่วไป", code: "IT" },
+  { name: "ทั้งหมด", code: "ALL" },
+  { name: "ของใช้ทั่วไป", code: "IT" },
   { name: "อาหารแห้ง", code: "DF" },
   { name: "บรรจุภัณฑ์", code: "PG" },
   { name: "เครื่องดื่ม", code: "DR" },
   { name: "ยา", code: "MD" },
-  { name: "วัสดุสิ้นเปลือง", code: "CS" }
+  { name: "วัสดุสิ้นเปลือง", code: "CS" },
 ]);
 
 const getData = async () => {
@@ -190,6 +213,7 @@ const getData = async () => {
     );
     console.log("API response:", resp.data); // Debugging line
     products.value = resp.data.data.products; // Ensure correct path to products
+    products_default.value = resp.data.data.products; // Ensure correct path to products
     console.log("Products array:", products.value); // Debugging line
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
@@ -209,6 +233,50 @@ const handleProductCreated = async (response) => {
     await getData();
   } else {
     console.warn("Received invalid product data.");
+  }
+};
+
+const filteredProducts = computed(() => {
+  let filtered = products.value;
+  if (searchProduct.value) {
+    filtered = filtered.filter((product) =>
+      product.product_name
+        .toLowerCase()
+        .includes(searchProduct.value.toLowerCase())
+    );
+  }
+  if (categoryValue.value && categoryValue.value !== "ทั้งหมด") {
+    filtered = filtered.filter(
+      (product) => product.product_category === categoryValue.value
+    );
+  }
+  if (statusValue.value && statusValue.value !== "พร้อมขาย") {
+    filtered = filtered.filter(
+      (product) => product.product_status === statusValue.value
+    );
+  }
+  return filtered;
+});
+
+const textcut = (string: string) => {
+  if (string.length > 5) {
+    string = string.substring(0, 4) + "...";
+  }
+  return string;
+};
+
+const filterCategory = (type: string) => {
+  // This function is intentionally left blank as the filtering is done automatically by the computed property
+};
+
+const removeProduct = async (productId) => {
+  try {
+    await $axios.delete(`http://10.5.41.89:8000/api/products/${productId}`);
+    products.value = products.value.filter(
+      (product) => product.product_id !== productId
+    );
+  } catch (err) {
+    console.error("Error removing product:", err);
   }
 };
 

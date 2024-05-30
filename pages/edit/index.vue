@@ -51,7 +51,7 @@
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm">
-              {{ product.product_id }}
+              {{ textcut(product.product_id) }}
             </th>
             <td class="px-6 py-4">{{ product.product_name }}</td>
             <td class="px-6 py-4">{{ product.product_Price }}</td>
@@ -139,6 +139,13 @@ const filteredProducts = computed(() => {
   }
   return filtered;
 });
+
+const textcut = (string: string) => {
+  if (string.length > 5) {
+    string = string.substring(0, 4) + "...";
+  }
+  return string;
+};
 
 onMounted(() => {
   getData();
