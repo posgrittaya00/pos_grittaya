@@ -97,7 +97,7 @@
               <tr
                 v-for="product in filteredProducts"
                 :key="product.product_id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                class="text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <th
                   scope="row"
