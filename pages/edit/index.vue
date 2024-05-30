@@ -1,9 +1,7 @@
 <template>
   <!-- กล่องที่ 1 -->
   <div class="flex">
-    <div
-      class="flex flex-col gap-4 w-full h-[70px] text-[16px] font-semibold rounded-t-lg bg-[white] p-4 relative mt-2 mr-2"
-    >
+    <div class="flex flex-col gap-4 w-full h-[70px] text-[16px] font-semibold rounded-t-lg bg-[white] p-4 relative mt-2 mr-2">
       <div class="flex justify-between">
         <Dropdown
           v-model="selectedCategory"
@@ -14,9 +12,7 @@
           class="w-[250px] h-[40px]"
         />
         <span class="relative" iconPosition="left">
-          <i
-            class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"
-          />
+          <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600" />
           <input
             v-model="searchProduct"
             type="search"
@@ -32,13 +28,9 @@
   </div>
   <!-- กล่องที่ 2 -->
   <div class="flex w-full">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full">
-      <table
-        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-      >
-        <thead
-          class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
+    <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full mr-2">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">รหัสสินค้า</th>
             <th scope="col" class="px-6 py-3">ชื่อสินค้า</th>
@@ -68,18 +60,10 @@
             <td class="px-6 py-4">{{ product.product_type }}</td>
             <td class="px-6 py-4">{{ product.product_category }}</td>
             <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >แก้ไขสต็อก</a
-              >
+              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แก้ไขสต็อก</a>
             </td>
             <td class="flex items-center px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
-                >ลบสินค้า</a
-              >
+              <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
             </td>
           </tr>
         </tbody>
