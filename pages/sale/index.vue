@@ -191,7 +191,7 @@ const category = ref([
 const getData = async () => {
   try {
     const resp = await $axios.get(
-      "http://10.5.41.86:8000/api/products/GetAllProduct"
+      "http://10.5.41.89:8000/api/products/GetAllProduct"
     );
     console.log("API response:", resp.data); // Debugging line
     products.value = resp.data.data.products; // Ensure correct path to products
