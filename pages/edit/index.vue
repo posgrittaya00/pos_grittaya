@@ -12,7 +12,9 @@
           class="w-[250px] h-[40px]"
         />
         <span class="relative" iconPosition="left">
-          <i class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600" />
+          <i
+            class="pi pi-search absolute top-1/2 transform -translate-y-1/2 left-3 text-surface-400 dark:text-surface-600"
+          />
           <input
             v-model="searchProduct"
             type="search"
@@ -48,10 +50,7 @@
             :key="product.product_id"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm"
-            >
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm">
               {{ product.product_id }}
             </th>
             <td class="px-6 py-4">{{ product.product_name }}</td>
@@ -60,7 +59,7 @@
             <td class="px-6 py-4">{{ product.product_type }}</td>
             <td class="px-6 py-4">{{ product.product_category }}</td>
             <td class="px-6 py-4">
-              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แก้ไขสต็อก</a>
+              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" @click="goToEdit(product)">แก้ไขสต็อก</a>
             </td>
             <td class="flex items-center px-6 py-4">
               <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
@@ -69,11 +68,16 @@
         </tbody>
       </table>
     </div>
+    <div v-if="addproduct" :class="['ease-in-out', 'duration-200', { 'w-0 h-0 translate-x-[999px]': OpenEdit }]">
+      <edit :open="OpenEdit" :product="productToEdit" @product-updated="handleProductUpdated" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import edit from "./add/editsalestock.vue";
 import { useNuxtApp } from "#app";
 
 const selectedCategory = ref<string | undefined>();
@@ -82,32 +86,56 @@ const category = ref([
   { name: "คลังสินค้าที่สต็อก", code: "ST" },
 ]);
 
+const router = useRouter();
 const searchProduct = ref<string>("");
+const OpenEdit = ref(true);
 const products = ref([]);
-const addsearch = ref(false); // Added declaration of addsearch
+const addsearch = ref(false);
+const addproduct = ref(false);
+const productToEdit = ref(null);
+
+const goToEdit = (product) => {
+  productToEdit.value = product;
+  addproduct.value = !addproduct.value;
+  addsearch.value = !addsearch.value;
+  OpenEdit.value = !OpenEdit.value;
+};
 
 const { $axios } = useNuxtApp();
 
 const getData = async () => {
   try {
     const resp = await $axios.get("http://10.5.41.89:8000/api/products/GetAllProduct");
-    console.log("API response:", resp.data); // Debugging line
-    products.value = resp.data.data.products; // Ensure correct path to products
-    console.log("Products array:", products.value); // Debugging line
+    console.log("API response:", resp.data);
+    products.value = resp.data.data.products;
+    console.log("Products array:", products.value);
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
+  }
+};
+
+const handleProductUpdated = async (updatedProduct) => {
+  const index = products.value.findIndex(product => product.product_id === updatedProduct.product_id);
+  if (index !== -1) {
+    products.value[index] = updatedProduct;
+    addproduct.value = false;
+    addsearch.value = false;
+    OpenEdit.value = true;
+
+    // Fetch updated data
+    await getData();
   }
 };
 
 const filteredProducts = computed(() => {
   let filtered = products.value;
   if (searchProduct.value) {
-    filtered = filtered.filter(product =>
+    filtered = filtered.filter((product) =>
       product.product_name.toLowerCase().includes(searchProduct.value.toLowerCase())
     );
   }
   if (selectedCategory.value) {
-    filtered = filtered.filter(product => product.product_category === selectedCategory.value);
+    filtered = filtered.filter((product) => product.product_category === selectedCategory.value);
   }
   return filtered;
 });
