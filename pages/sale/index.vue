@@ -93,7 +93,7 @@
               <tr
                 v-for="product in filteredProducts"
                 :key="product.product_id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                class="text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <td class="px-6 py-4">{{ product.product_id }}</td>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
