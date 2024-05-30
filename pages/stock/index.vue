@@ -66,6 +66,7 @@
                 icon="pi pi-plus"
                 class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
                 @click="goTosalecreate"
+                rounded
               />
             </span>
           </div>
