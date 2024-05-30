@@ -24,7 +24,6 @@
                 optionLabel="name"
                 placeholder="หมวดหมู่"
                 class="w-full md:w-[9rem] h-[40px]"
-                @change="filterProducts"
               />
             </span>
             <form class="w-full" @submit.prevent="filterProducts">
@@ -66,14 +65,7 @@
                 />
               </div>
             </form>
-
-            <span class="ml-auto buttoncreate">
-              <Button
-                icon="pi pi-plus"
-                class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
-                @click="goTosalecreate"
-              />
-            </span>
+            <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" rounded />
           </div>
         </div>
       </div>
