@@ -188,6 +188,10 @@ const selectedCategory = ref<string | undefined>();
 const category = ref([
   { name: "ของใช้ทั่วไป", code: "IT" },
   { name: "อาหารแห้ง", code: "DF" },
+  { name: "บรรจุภัณฑ์", code: "PG" },
+  { name: "เครื่องดื่ม", code: "DR" },
+  { name: "ยา", code: "MD" },
+  { name: "วัสดุสิ้นเปลือง", code: "CS" }
 ]);
 
 const getData = async () => {
