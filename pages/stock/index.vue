@@ -14,6 +14,7 @@
                 optionLabel="name"
                 placeholder="สถานะ"
                 class="w-[170px] h-[40px]"
+                @change="filterProducts"
               />
             </span>
             <span>
@@ -25,8 +26,11 @@
                 class="w-[170px] h-[40px]"
               />
             </span>
-            <form class="w-full ">
-              <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+            <form class="w-full" @submit.prevent="filterProducts">
+              <label
+                for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >
                 Search
               </label>
               <div class="relative">
@@ -57,25 +61,21 @@
                   placeholder="ค้นหาสินค้า"
                   required
                   :class="addsearch == false ? 'w-[230px]' : 'w-full'"
+                  @input="filterProducts"
                 />
               </div>
             </form>
-
-            <span class="ml-auto buttoncreate">
-              <Button
-                icon="pi pi-plus"
-                class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
-                @click="goTosalecreate"
-                rounded
-              />
-            </span>
+            <Button
+              icon="pi pi-plus"
+              class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
+              @click="goTosalecreate"
+              rounded
+            />
           </div>
         </div>
       </div>
-      <div
-        class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2"
-      >
-        <div class="relative overflow-x-auto">
+      <div class="flex w-full">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full">
           <table
             class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
           >
@@ -89,16 +89,22 @@
                 <th scope="col" class="px-6 py-3">จำนวน</th>
                 <th scope="col" class="px-6 py-3">หน่วย</th>
                 <th scope="col" class="px-6 py-3">หมวดหมู่</th>
-                <th scope="col" class="px-6 py-3">สถานะ</th>
+                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="product in products"
+                v-for="product in filteredProducts"
                 :key="product.product_id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                class="text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
-                <td class="px-6 py-4">{{ product.product_id }}</td>
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm"
+                >
+                  {{ product.product_id }}
+                </th>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
                 <td class="px-6 py-4">{{ product.product_amount }}</td>
@@ -114,11 +120,14 @@
                       class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >ไม่พร้อมขาย</span
                     >
-                    <td class="flex items-center px-6 py-4">
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">ลบสินค้า</a>
-                        </td>
                   </label>
-                  
+                </td>
+                <td class="flex items-center px-6 py-4">
+                  <a
+                    href="#"
+                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
+                    >ลบสินค้า</a
+                  >
                 </td>
               </tr>
             </tbody>
@@ -143,7 +152,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import salecreate from "./new/stockcreate.vue";
 import { useNuxtApp } from "#app";
@@ -176,7 +185,7 @@ const status = ref([
 
 const selectedCategory = ref<string | undefined>();
 const category = ref([
-{ name: "ของใช้ทั่วไป", code: "IT" },
+  { name: "ของใช้ทั่วไป", code: "IT" },
   { name: "อาหารแห้ง", code: "DF" },
   { name: "บรรจุภัณฑ์", code: "PG" },
   { name: "เครื่องดื่ม", code: "DR" },
@@ -211,6 +220,32 @@ const handleProductCreated = async (response) => {
   } else {
     console.warn("Received invalid product data.");
   }
+};
+
+const filteredProducts = computed(() => {
+  let filtered = products.value;
+  if (searchProduct.value) {
+    filtered = filtered.filter((product) =>
+      product.product_name
+        .toLowerCase()
+        .includes(searchProduct.value.toLowerCase())
+    );
+  }
+  if (selectedCategory.value) {
+    filtered = filtered.filter(
+      (product) => product.product_category === selectedCategory.value
+    );
+  }
+  if (selectedStatus.value) {
+    filtered = filtered.filter(
+      (product) => product.product_status === selectedStatus.value
+    );
+  }
+  return filtered;
+});
+
+const filterProducts = () => {
+  // This function is intentionally left blank as the filtering is done automatically by the computed property
 };
 
 onMounted(() => {
