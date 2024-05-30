@@ -65,16 +65,19 @@
                 />
               </div>
             </form>
-            <Button icon="pi pi-plus" class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2" @click="goTosalecreate" rounded />
+            <Button
+              icon="pi pi-plus"
+              class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
+              @click="goTosalecreate"
+              rounded
+            />
           </div>
         </div>
       </div>
-      <div
-        class="flex flex-col gap-2 w-full h-[500px] text-[16px] font-semibold rounded-b-lg bg-[white] p-3 relative mr-2"
-      >
-        <div class="relative overflow-x-auto">
+      <div class="flex w-full">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full">
           <table
-            class="w-full text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
           >
             <thead
               class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -86,16 +89,22 @@
                 <th scope="col" class="px-6 py-3">จำนวน</th>
                 <th scope="col" class="px-6 py-3">หน่วย</th>
                 <th scope="col" class="px-6 py-3">หมวดหมู่</th>
-                <th scope="col" class="px-6 py-3">สถานะ</th>
+                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="product in filteredProducts"
                 :key="product.product_id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <td class="px-6 py-4">{{ product.product_id }}</td>
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm"
+                >
+                  {{ product.product_id }}
+                </th>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
                 <td class="px-6 py-4">{{ product.product_amount }}</td>
@@ -108,13 +117,13 @@
                       class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
                     ></div>
                     <span
-                      class="ms-3 text-lg font-medium text-gray-900 dark:text-gray-300"
+                      class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >ไม่พร้อมขาย</span
                     >
                     <td class="flex items-center px-6 py-4">
                       <a
                         href="#"
-                        class="font-medium text-lg text-red-600 dark:text-red-500 hover:underline ms-3"
+                        class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
                         >ลบสินค้า</a
                       >
                     </td>
@@ -127,19 +136,19 @@
       </div>
     </div>
     <div
-        v-if="addproduct"
-        :class="[
-          'ease-in-out',
-          'duration-200',
-          { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
-        ]"
-      >
-        <salecreate
-          :open="OpenSaleCreate"
-          @product-created="handleProductCreated"
-        />
-      </div>
+      v-if="addproduct"
+      :class="[
+        'ease-in-out',
+        'duration-200',
+        { 'w-0 h-0 translate-x-[999px]': OpenSaleCreate },
+      ]"
+    >
+      <salecreate
+        :open="OpenSaleCreate"
+        @product-created="handleProductCreated"
+      />
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -213,14 +222,20 @@ const filteredProducts = computed(() => {
   let filtered = products.value;
   if (searchProduct.value) {
     filtered = filtered.filter((product) =>
-      product.product_name.toLowerCase().includes(searchProduct.value.toLowerCase())
+      product.product_name
+        .toLowerCase()
+        .includes(searchProduct.value.toLowerCase())
     );
   }
   if (selectedCategory.value) {
-    filtered = filtered.filter((product) => product.product_category === selectedCategory.value);
+    filtered = filtered.filter(
+      (product) => product.product_category === selectedCategory.value
+    );
   }
   if (selectedStatus.value) {
-    filtered = filtered.filter((product) => product.product_status === selectedStatus.value);
+    filtered = filtered.filter(
+      (product) => product.product_status === selectedStatus.value
+    );
   }
   return filtered;
 });
@@ -252,4 +267,3 @@ onMounted(() => {
   color: #999;
 }
 </style>
-
