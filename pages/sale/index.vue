@@ -124,13 +124,13 @@
                   <label class="inline-flex items-center mb-5 cursor-pointer">
                     <input
                       type="checkbox"
-                      class="sr-only "
+                      class="sr-only"
                       :value="product.status"
                       :class="product.status === 1 ? 'peer' : ' checked'"
                       @click="toggleSale(product.product_id, product.status)"
                     />
                     <div
-                      class="relative w-11 h-6  rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"
+                      class="relative w-11 h-6 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"
                       :class="
                         product.status == 0
                           ? 'bg-gray-200'
@@ -183,6 +183,35 @@ import salecreate from "./partial/salecreate.vue";
 import { useNuxtApp } from "#app";
 import Swal from "sweetalert2";
 
+interface showData {
+  name: string;
+  amount: number;
+}
+
+interface Product {
+  name: string;
+  price: number;
+  amount: number;
+}
+
+const product = [
+  {
+    name: "A",
+    price: 100,
+    amount: 3,
+  },
+  {
+    name: "B",
+    price: 100,
+    amount: 10,
+  },
+  {
+    name: "C",
+    price: 100,
+    amount: 1,
+  },
+];
+
 const router = useRouter();
 const OpenSaleCreate = ref(true);
 const addproduct = ref(false);
@@ -228,19 +257,31 @@ const getData = async () => {
     );
 
     products.value = resp.data.data.products;
-
-    for (let index = 0; index < products.value.length; index++) {
-      const data = products.value[index];
-      console.log(data);
-      if (data.product_amount < 5) {
-        Swal.fire({
-          title: "<i>สินค้าที่ใกล้หมด</i>",
-          html: `<span class="text-black font-bold">${data.product_name} คงเหลือ <span class="text-red-500">${data.product_amount}</span> ชิ้น</span>`,
-          confirmButtonText: "<div>ยืนยัน</div>",
-        });
-      }
-    }
     products_default.value = resp.data.data.products;
+
+    const mapData = products.value.reduce(
+      (accumulator: any[], currentProduct) => {
+        if (currentProduct.product_amount < 5) {
+          accumulator.push(currentProduct);
+        }
+        return accumulator;
+      },
+      []
+    );
+
+    if (mapData.length > 0) {
+      const message = mapData
+        .map(
+          (product) =>
+            `${product.product_name} <span class="text-red-500">คงเหลือ ${product.product_amount} ชิ้น</span>`
+        )
+        .join("<br>");
+      Swal.fire({
+        title: "สินค้าใกล้หมดแล้ว",
+        html: message,
+        icon: "warning",
+      });
+    }
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
   }
@@ -283,7 +324,7 @@ const filteredProducts = computed(() => {
       (product) => product.product_status === statusValue.value
     );
   }
-  
+
   return filtered;
 });
 
