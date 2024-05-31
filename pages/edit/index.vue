@@ -1,10 +1,10 @@
 <template>
   <div class="flex">
-    <div :class="OpenEdit==true? 'w-full' : ''">
-      <!-- กล่องที่ 1 -->
+    <div :class="OpenEdit == true ? 'w-full' : ''">
+      <!-- Container 1 -->
       <div class="flex gap-2 mt-2 mr-2">
         <div
-          :class="addproduct ? 'w-[700px]' : 'w-full'"
+          :class="addproduct ? 'w-[900px]' : 'w-full'"
           class="flex flex-col gap-4 w-full text-[16px] font-semibold rounded-t-lg bg-white relative mr-2"
         >
           <div class="flex shadow py-4 rounded-b-md">
@@ -30,9 +30,8 @@
                   <label
                     for="default-search"
                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                    >Search</label
                   >
-                    Search
-                  </label>
                   <div class="relative">
                     <div
                       class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -69,7 +68,7 @@
           </div>
         </div>
       </div>
-      <!-- กล่องที่ 2 -->
+      <!-- Container 2 -->
       <div class="flex w-full">
         <div
           class="relative overflow-x-auto shadow-md sm:rounded-b-lg w-full mr-2"
@@ -87,7 +86,6 @@
                 <th scope="col" class="px-6 py-3">จำนวน</th>
                 <th scope="col" class="px-6 py-3">หน่วย</th>
                 <th scope="col" class="px-6 py-3">หมวดหมู่</th>
-                <th scope="col" class="px-6 py-3"></th>
                 <th scope="col" class="px-6 py-3"></th>
               </tr>
             </thead>
@@ -116,13 +114,6 @@
                     >แก้ไขสต็อก</a
                   >
                 </td>
-                <td class="flex items-center px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
-                    >ลบสินค้า</a
-                  >
-                </td>
               </tr>
             </tbody>
           </table>
@@ -134,10 +125,11 @@
       :class="[
         'ease-in-out',
         'duration-200',
-        { 'w-0 h-0 translate-x-[999px]': OpenEdit },
+        { 'w-0 h-0 translate-x-[1200px]': OpenEdit },
       ]"
     >
-      <edit
+      <func-edit
+        v-if="productToEdit"
         :open="OpenEdit"
         :product="productToEdit"
         @product-updated="handleProductUpdated"
@@ -149,7 +141,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
-import edit from "./add/editsalestock.vue";
+import funcEdit from "./add/editsalestock.vue";
 import { useNuxtApp } from "#app";
 
 const categoryValue = ref<string>("");

@@ -40,6 +40,7 @@
                     <Column field="unit" header="หน่วย"></Column>
                     <Column field="price" header="ราคา(บาท)"></Column>
                     <Column field="discount" header="ส่วนลด"></Column>
+                    <Column field="discount" header="รวม"></Column>
                 </DataTable>
                 <Button label="เพิ่มแถวรายการ" icon="pi pi-plus-circle" class="w-[200px] h-[40px] text-lg bg-[#326035] mt-3" @click="goToCreateOrder" />
                 <div class="border-t border-black mt-4"></div>
