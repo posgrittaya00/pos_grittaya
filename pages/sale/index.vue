@@ -124,16 +124,16 @@
                   <label class="inline-flex items-center mb-5 cursor-pointer">
                     <input
                       type="checkbox"
-                      class="sr-only peer"
+                      class="sr-only "
                       :value="product.status"
                       :class="product.status === 1 ? 'peer' : ' checked'"
                       @click="toggleSale(product.product_id, product.status)"
                     />
                     <div
-                      class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                      class="relative w-11 h-6  rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"
                       :class="
-                        product.status === 0
-                          ? ''
+                        product.status == 0
+                          ? 'bg-gray-200'
                           : 'bg-blue-600 after:translate-x-full'
                       "
                     ></div>
@@ -228,6 +228,18 @@ const getData = async () => {
     );
 
     products.value = resp.data.data.products;
+
+    for (let index = 0; index < products.value.length; index++) {
+      const data = products.value[index];
+      console.log(data);
+      if (data.product_amount < 5) {
+        Swal.fire({
+          title: "<i>สินค้าที่ใกล้หมด</i>",
+          html: `<span class="text-black font-bold">${data.product_name} คงเหลือ <span class="text-red-500">${data.product_amount}</span> ชิ้น</span>`,
+          confirmButtonText: "<div>ยืนยัน</div>",
+        });
+      }
+    }
     products_default.value = resp.data.data.products;
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
@@ -271,6 +283,7 @@ const filteredProducts = computed(() => {
       (product) => product.product_status === statusValue.value
     );
   }
+  
   return filtered;
 });
 
