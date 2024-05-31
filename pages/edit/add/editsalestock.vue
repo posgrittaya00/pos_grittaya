@@ -5,10 +5,10 @@
       <div class="card flex justify-center">
         <span
           class="max-w-full w-full text-center py-2 rounded-full border border-black text-[18px]"
-          >เพิ่มสินค้า</span
+          >แก้ไขสินค้า</span
         >
       </div>
-      <form @submit.prevent="create_product">
+      <form @submit.prevent="updateProductId">
         <div class="flex justify-between gap-2 flex-grow">
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-1 mt-1">
@@ -98,7 +98,7 @@
       };
     },
     methods: {
-      async create_product() {
+      async updateProductId() {
         try {
           const payload = {
             product_name: this.Name,
