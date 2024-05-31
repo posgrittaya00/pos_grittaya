@@ -27,6 +27,37 @@
               />
             </span>
             <form class="w-full" @submit.prevent="filterProducts">
+              <div>
+                <select
+                  @change="filterCategory('status')"
+                  v-model="statusValue"
+                  class="w-[150px] h-[40px] bg-gray-200 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                >
+                  <option value="" selected>พร้อมขาย</option>
+                  <option
+                    v-for="(item, index) in status"
+                    :key="index"
+                    :value="item.name"
+                  >
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <select
+                  @change="filterCategory('category')"
+                  v-model="categoryValue"
+                  class="w-[150px] bg-gray-200 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                >
+                  <option
+                    v-for="(item, index) in category"
+                    :key="index"
+                    :value="item.name"
+                  >
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
               <label
                 for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -101,9 +132,9 @@
               >
                 <th
                   scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {{ product.product_id }}
+                  {{ textcut(product.product_id) }}
                 </th>
                 <td class="px-6 py-4">{{ product.product_name }}</td>
                 <td class="px-6 py-4">{{ product.product_Price }}</td>
@@ -125,7 +156,8 @@
                 <td class="flex items-center px-6 py-4">
                   <a
                     href="#"
-                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
+                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ml-3"
+                    @click="removeProduct(product.product_id)"
                     >ลบสินค้า</a
                   >
                 </td>
@@ -169,7 +201,11 @@ const goTosalecreate = () => {
   OpenSaleCreate.value = !OpenSaleCreate.value;
 };
 
+const selectedStatus = ref<string>("");
 const searchProduct = ref<string>("");
+const selectedCategory = ref<string>("");
+const categoryValue = ref<string>("ทั้งหมด");
+const statusValue = ref<string>("พร้อมขาย");
 
 const { $axios } = useNuxtApp();
 
@@ -177,20 +213,19 @@ definePageMeta({
   layout: "default",
 });
 
-const selectedStatus = ref<string | undefined>();
 const status = ref([
   { name: "พร้อมขาย", code: "Y" },
   { name: "ไม่พร้อมขาย", code: "N" },
 ]);
 
-const selectedCategory = ref<string | undefined>();
 const category = ref([
+  { name: "ทั้งหมด", code: "ALL" },
   { name: "ของใช้ทั่วไป", code: "IT" },
   { name: "อาหารแห้ง", code: "DF" },
   { name: "บรรจุภัณฑ์", code: "PG" },
   { name: "เครื่องดื่ม", code: "DR" },
   { name: "ยา", code: "MD" },
-  { name: "วัสดุสิ้นเปลือง", code: "CS" }
+  { name: "วัสดุสิ้นเปลือง", code: "CS" },
 ]);
 
 const getData = async () => {
@@ -241,13 +276,44 @@ const filteredProducts = computed(() => {
       (product) => product.product_status === selectedStatus.value
     );
   }
+
+  if (categoryValue.value && categoryValue.value !== "ทั้งหมด") {
+    filtered = filtered.filter(
+      (product) => product.product_category === categoryValue.value
+    );
+  }
+  if (statusValue.value && statusValue.value !== "พร้อมขาย") {
+    filtered = filtered.filter(
+      (product) => product.product_status === statusValue.value
+    );
+  }
   return filtered;
 });
 
 const filterProducts = () => {
   // This function is intentionally left blank as the filtering is done automatically by the computed property
 };
+const textcut = (string: string) => {
+  if (string.length > 5) {
+    string = string.substring(0, 4) + "...";
+  }
+  return string;
+};
 
+const filterCategory = (type: string) => {
+  // This function is intentionally left blank as the filtering is done automatically by the computed property
+};
+
+const removeProduct = async (productId) => {
+  try {
+    await $axios.delete(`http://10.5.41.89:8000/api/products/${productId}`);
+    products.value = products.value.filter(
+      (product) => product.product_id !== productId
+    );
+  } catch (err) {
+    console.error("Error removing product:", err);
+  }
+};
 onMounted(() => {
   getData();
 });
