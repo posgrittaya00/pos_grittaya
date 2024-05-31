@@ -69,7 +69,6 @@
                   type="search"
                   id="default-search"
                   class="block w-full h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
                   placeholder="ค้นหาสินค้า"
                   @input="filterCategory('search')"
                   required
@@ -125,24 +124,25 @@
                   <label class="inline-flex items-center mb-5 cursor-pointer">
                     <input
                       type="checkbox"
-                      class="sr-only"
+                      class="sr-only peer"
                       :value="product.status"
                       :class="product.status === 1 ? 'peer' : ' checked'"
                       @click="toggleSale(product.product_id, product.status)"
                     />
                     <div
-                      class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 after:transition-all peer-checked:bg-blue-600 rtl:peer-checked:after:-translate-x-full peer-checked:after:translate-x-full dark:peer-focus:ring-blue-800 peer-focus:ring-blue-300 dark:border-gray-600 rounded-full peer dark:bg-gray-700 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5"
+                      class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
                       :class="
                         product.status === 0
                           ? ''
-                          : 'bg-blue-600 after:translate-x-fu ll'
+                          : 'bg-blue-600 after:translate-x-full'
                       "
                     ></div>
                     <span
                       class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >{{
                         product.status === 0 ? "ไม่พร้อมขาย" : "พร้อมขาย"
-                      }}</span>
+                      }}</span
+                    >
                   </label>
                 </td>
 
@@ -226,12 +226,9 @@ const getData = async () => {
     const resp = await $axios.get(
       "http://10.5.41.89:8000/api/products/GetAllProduct"
     );
-    // console.log("API response:", resp.data);
-    // Debugging line
-    products.value = resp.data.data.products; // Ensure correct path to products
-    products_default.value = resp.data.data.products; // Ensure correct path to products
-    // console.log("Products array:", products.value);
-    // Debugging line
+
+    products.value = resp.data.data.products;
+    products_default.value = resp.data.data.products;
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
   }
