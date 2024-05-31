@@ -80,7 +80,7 @@
               class="w-[100px] h-[40px] text-lg bg-[#326035] mr-2"
               @click="goTosalecreate"
               rounded
-            />
+            ></Button>
           </div>
         </div>
       </div>
@@ -124,33 +124,34 @@
                   <label class="inline-flex items-center mb-5 cursor-pointer">
                     <input
                       type="checkbox"
-                      :value="statusToggle"
                       class="sr-only"
-                      :class="product.Status == 1 ? '' : 'peer'"
-                      @click="toggleSale(product.product_id, product.Status)"
+                      :value="product.status"
+                      :class="product.status === 1 ? 'peer' : ' checked'"
+                      @click="toggleSale(product.product_id, product.status)"
                     />
                     <div
                       class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 after:transition-all peer-checked:bg-blue-600 rtl:peer-checked:after:-translate-x-full peer-checked:after:translate-x-full dark:peer-focus:ring-blue-800 peer-focus:ring-blue-300 dark:border-gray-600 rounded-full peer dark:bg-gray-700 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5"
                       :class="
-                        product.Status == 0
+                        product.status === 0
                           ? ''
-                          : 'bg-blue-600 after:translate-x-full'
+                          : 'bg-blue-600 after:translate-x-fu ll'
                       "
                     ></div>
                     <span
                       class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >{{
-                        product.Status == 0 ? "ไม่พร้อมขาย" : "พร้อมขาย"
-                      }}</span
-                    >
-                    <td class="flex items-center px-6 py-4">
-                      <a
-                        href="#"
-                        class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ms-3"
-                        >ลบสินค้า</a
-                      >
-                    </td>
+                        product.status === 0 ? "ไม่พร้อมขาย" : "พร้อมขาย"
+                      }}</span>
                   </label>
+                </td>
+
+                <td class="flex items-center px-6 py-4">
+                  <a
+                    href="#"
+                    class="font-medium text-sm text-red-600 dark:text-red-500 hover:underline ml-3"
+                    @click="removeProduct(product.product_id)"
+                    >ลบสินค้า</a
+                  >
                 </td>
               </tr>
             </tbody>
@@ -224,17 +225,20 @@ const getData = async () => {
     const resp = await $axios.get(
       "http://10.5.41.89:8000/api/products/GetAllProduct"
     );
-    console.log("API response:", resp.data); // Debugging line
+    // console.log("API response:", resp.data);
+    // Debugging line
     products.value = resp.data.data.products; // Ensure correct path to products
     products_default.value = resp.data.data.products; // Ensure correct path to products
-    console.log("Products array:", products.value); // Debugging line
+    // console.log("Products array:", products.value);
+    // Debugging line
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
   }
 };
 
 const handleProductCreated = async (response) => {
-  console.log("Response received:", response); // Log the response object
+  // console.log("Response received:", response);
+  // Log the response object
   const newProduct = response.data;
   if (newProduct) {
     products.value.push(newProduct);
@@ -251,6 +255,7 @@ const handleProductCreated = async (response) => {
 
 const filteredProducts = computed(() => {
   let filtered = products.value;
+
   if (searchProduct.value) {
     filtered = filtered.filter((product) =>
       product.product_name
@@ -291,7 +296,6 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 const toggleSale = async (productId: any, status: number) => {
-  console.log(statusToggle.value);
   const pro_status = status > 0 ? status : 0;
   let newStatus = 0;
   if (pro_status == 0) {
@@ -307,7 +311,7 @@ const toggleSale = async (productId: any, status: number) => {
       headers: {},
       data: {
         product_id: productId,
-        status_product: newStatus, // This is the body part
+        status_product: newStatus,
       },
     });
     const { data } = resp;
@@ -348,12 +352,12 @@ const removeProduct = async (productId) => {
               product_id: productId, // This is the body part
             },
           });
-          console.log(resp);
+          // console.log(resp);
           const { data } = resp;
           if (data.status === "200") {
             await getData();
           }
-          console.log(data);
+          // console.log(data);
           swalWithBootstrapButtons.fire({
             title: "ลบแล้ว!",
             text: "สินค้าถูกลบแล้ว",
