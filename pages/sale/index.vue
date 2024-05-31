@@ -228,6 +228,18 @@ const getData = async () => {
     );
 
     products.value = resp.data.data.products;
+
+    for (let index = 0; index < products.value.length; index++) {
+      const data = products.value[index];
+      console.log(data);
+      if (data.product_amount < 5) {
+        Swal.fire({
+          title: "<i>สินค้าที่ใกล้หมด</i>",
+          html: `<span class="text-black font-bold">${data.product_name} คงเหลือ <span class="text-red-500">${data.product_amount}</span> ชิ้น</span>`,
+          confirmButtonText: "<div>ยืนยัน</div>",
+        });
+      }
+    }
     products_default.value = resp.data.data.products;
   } catch (err) {
     console.log("เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:", err);
