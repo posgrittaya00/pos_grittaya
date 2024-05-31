@@ -8,7 +8,7 @@
         >เพิ่มสินค้า</span
       >
     </div>
-    <form @submit.prevent="create_product">
+    <form @submit.prevent="create_setproduct">
       <div class="flex justify-between gap-2 flex-grow">
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-1 mt-1">
@@ -58,8 +58,8 @@
             </button>
             <input
               type="file"
-              id="productImageInput"
-              ref="productImageInput"
+              id="setproductImageInput"
+              ref="setproductImageInput"
               style="display: none"
               @change="handleFileChange"
               accept="image/*"
@@ -98,27 +98,27 @@ export default defineComponent({
     };
   },
   methods: {
-    async create_product() {
+    async create_setproduct() {
       try {
         const payload = {
-          product_name: this.Name,
-          product_Price: Number(this.Price),
-          product_type: this.Type,
-          product_amount: Number(this.Amount),
-          product_category: this.Category,
+          setproduct_name: this.Name,
+          setproduct_Price: Number(this.Price),
+          setproduct_type: this.Type,
+          setproduct_amount: Number(this.Amount),
+          setproduct_category: this.Category,
         };
         const response = await axios.post(
-          "http://10.5.41.89:8000/api/products/CreateProduct",
+          "http://10.5.41.89:8000/api/setproducts/CreateSetProduct",
           payload
         );
         console.log(response.data);
-        this.$emit("product-created", response.data); // Emit event with the created product data
+        this.$emit("setproduct-created", response.data); // Emit event with the created setproduct data
       } catch (error) {
-        console.error("There was an error creating the product:", error);
+        console.error("There was an error creating the setproduct:", error);
       }
     },
     triggerFileInput() {
-      (this.$refs.productImageInput as HTMLInputElement).click();
+      (this.$refs.setproductImageInput as HTMLInputElement).click();
     },
     handleFileChange(event: Event) {
       const input = event.target as HTMLInputElement;
